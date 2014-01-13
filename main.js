@@ -5,9 +5,9 @@ app.controller("MainController", function($scope){
 	$scope.selectedGenre = null;
         $scope.Aralik = Math.floor(Math.random() * 4) + 0;
         $scope.submit = function() {
-            if (this.text) {
-            alert(this.text);
-            this.text = '';
+            if (this.peoples.code) {
+            alert(this.peoples.code);
+            this.peoples.code = '';
             }};
         
 	$scope.people = [
