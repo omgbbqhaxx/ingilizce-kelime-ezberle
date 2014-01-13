@@ -15,6 +15,7 @@
 		<form  ng-submit="submit()" ng-repeat="peoples in people | filter:Aralik " >
 		 {{ peoples.code }}
 		<input type="text" name="text" ng-model="peoples.code" />
+		<input type="hidden" name="text" ng-model="peoples.decode" />
                 <input type="submit" id="submit" value="Try" />
                  </form>
          
