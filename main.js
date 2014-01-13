@@ -5,10 +5,15 @@ app.controller("MainController", function($scope){
 	$scope.selectedGenre = null;
         $scope.Aralik = Math.floor(Math.random() * 4) + 0;
         $scope.submit = function() {
-            if (this.peoples.code) {
-            alert(this.peoples.decode);
-            
-            }};
+            if (this.peoples.decode == this.text) {
+            alert("Doğru");
+	    location.reload();
+            }else{
+		alert("Hatalı");
+		location.reload();
+	    }
+	    
+	    };
         
 	$scope.people = [
 		{
