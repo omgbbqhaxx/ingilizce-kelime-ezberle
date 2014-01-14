@@ -1,12 +1,12 @@
 var app = angular.module('MyTutorialApp',[]);
 app.controller("MainController", function($scope,$interval){
-     $scope.Aralik = Math.floor(Math.random() * 4) + 0;
+    $scope.Aralik = Math.floor(Math.random() * 4) + 0;
     $scope.mol = "scope works!";
     $interval(function() {
         var x = $scope.people[$scope.Aralik]; 
         if ($scope.google ==x.decode) {
-        location.reload();
-        
+        $scope.Aralik = Math.floor(Math.random() * 4) + 0;
+        $scope.google = "";
         }
      
     }, 300);
