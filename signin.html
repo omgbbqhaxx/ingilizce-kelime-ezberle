@@ -34,7 +34,9 @@
 	    </div>
 	    <div id="formcontrol" style="position: relative; left: 13px; width: 371px; height: 400px;top:110px;" >
 	    <div style="position: relative;width: 370px;">
-            <h2 style="text-align: center;" ng-repeat="peoples in people |filter:Aralik">{{peoples.code}}</h2>
+           
+            <h2 style="text-align: center;" ng-model="people">{{people[Aralik].code}}</h2>
+	  
 	    </div>
 	    <input class="form-control" name="google" ng-model="google"  style="position: relative; height: 44px; width: 305px; left: 35px; top: 0px;" type="text" />
 	    <h3 style="text-align: center;" ><span class="label label-danger">{{result}}</span> </h3>
@@ -56,6 +58,7 @@
 	    <span class="label label-success">Hayvanlar</span>,
 	    <span class="label label-success">Yemekler</span>.
 	    </h5>
+	    
 	    
 	  
 	    
