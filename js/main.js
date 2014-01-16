@@ -114,35 +114,56 @@ app.controller("MainController", function($scope,$interval){
 			decode : 'blackberry'
 		}
 	];
-   
+	var stop;
+	var cntr = 100;
+	var dogrix = 0;
+	var hatalix = 0;
+	$scope.playcounter = cntr;
+	$scope.hatali = hatalix;
+	$scope.dogri = dogrix;
     $scope.nmbr = $scope.people[$scope.Aralik].decode.length;
-    $interval(function() {
+    stop = $interval(function() {
+	if (cntr == 98) {
+		$interval.cancel(stop);
+		alert("tebrikler " + dogrix + " kelime doğru bildiniz.");
+		location.reload();
+	}else {
         var x = $scope.people[$scope.Aralik];
 	switch ($scope.google) {
-		case x.decode:
+		case x.decode: //------**DOĞRU BİLDİ****----------+!1
 			$scope.Aralik = Math.floor(Math.random() * 22) + 0;
 			$scope.google = "";
 			$scope.result = "";
+			cntr--;
+			$scope.playcounter = cntr;
+			dogrix++;
+			$scope.dogri = dogrix;
 			break;
-		case "qqq": //Bu bilmediği anlamına geliyor burada 100'den bir çıkartılacak.
+		case "qqq": //-------***BİLEMEDİ****----------!1
+			$scope.Aralik = Math.floor(Math.random() * 22) + 0;
 			$scope.result = x.code +"<=>"+ x.decode;
 			$scope.google = "";
+			cntr--;
+			$scope.playcounter = cntr;
+			hatalix++;
+			$scope.hatali = hatalix;
 			break;
-		case "www": //burada kardeşimiz ipucu istiyor o yüzden bişey yapılmaya gerek yok.
+		case "www": //-------***İP UCU İSTEDİ****----------!0
 			var xnxxl = $scope.people[$scope.Aralik].decode.length;
 			$scope.result = $scope.people[$scope.Aralik].decode.charAt(0)+"***"+ $scope.people[$scope.Aralik].decode.charAt(xnxxl-1);
 			$scope.google = "";
+			break;
 		default:
 			if ($scope.google == undefined) {
 				var KelimeninHarfSayisi = x.decode.length;
 				$scope.nmbr = KelimeninHarfSayisi;
-				
 			}else {
-			
+				
 				var GirilenHarfSayisi =$scope.google.length;
 				var KelimeninHarfSayisi = x.decode.length;
 				var SonucRakam = KelimeninHarfSayisi - GirilenHarfSayisi;
 				$scope.nmbr = SonucRakam;
+				
 				
 			}
 			
@@ -150,7 +171,7 @@ app.controller("MainController", function($scope,$interval){
 			
 	}
         
-     
+	}
     }, 100);
     
     

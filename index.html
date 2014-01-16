@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>İngilizce öğren</title>
+  <meta name="description" content="mobile first, app, web app, responsive, admin dashboard, flat, flat ui">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> 
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/font.css" cache="false">
+  <link rel="stylesheet" href="css/style.css">
+  <link href='http://fonts.googleapis.com/css?family=Exo+2&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  <!--[if lt IE 9]>
+    <script src="js/ie/respond.min.js" cache="false"></script>
+    <script src="js/ie/html5.js" cache="false"></script>
+  <![endif]-->
+
+</head>
+<body>
+ 
+  <section id="content">
+    <div class="main padder">
+      <div class="row" >
+        <div class="col-lg-4 col-lg-offset-4 m-t-large"  >
+          <section  ng-app="MyTutorialApp" style="width:400px; height: 850px; background-image:url('images/eng.png');" ng-controller="MainController" class="panel">
+            <header style="font-family: 'Exo 2', sans-serif;" class="panel-heading text-center">
+             Hoşgeldin.
+            </header>
+	    <div style="position: relative; left: 13px; width: 371px; height: 100px; top: 112px;" id="head">
+	    <img style="position: relative;top:12px;left:14px;" src="images/avatar.png">
+	    <h3 style="font-family: 'Exo 2', sans-serif;color: white;position:relative;left:110px;top:-84px;width:261px;height:28px;">Ziyaretçi</h3>
+	    <h6 style="font-family: 'Exo 2',sans-serif; color: white; position: relative; left: 110px; top: -84px; width: 261px; height: 50px;">İstatisliklerinizi kayıt etmek ve diğer kullanıcılarla tanışmak için aşağıdaki facebook ile giriş yap butonunu kullanın.</h6>
+            <span class="label label-info" style="font-family: 'Exo 2',sans-serif;position: relative; top: -181px; left: 72px; font-size:15px;">{{nmbr}}</span>
+	    </div>
+	    <div id="formcontrol" style="position: relative; left: 13px; width: 371px; height: 400px;top:110px;" >
+	    <div style="position: relative;width: 370px;">
+            <h2 style="text-align: center;" ng-model="people">{{people[Aralik].code}}</h2>
+	    </div>
+	    <input class="form-control" name="google" ng-model="google"  style="position: relative; height: 44px; width: 305px; left: 35px; top: 0px;" type="text" />
+	    <h3 style="text-align: center;" ><span class="label label-danger">{{result}}</span> </h3>
+	    <h6 style="text-align: center;" >Cevabı görmek için <span class="label label-info">qqq</span>, ipucu  için <span class="label label-info">www</span> yazın . </h6>
+	    <h5 style="text-align: center;margin: 5px;" >
+	    <span class="label label-success">Rastgele</span>,
+	    <span class="label label-success">Ad</span>,
+	    <span class="label label-success">Sıfat</span>,
+	    <span class="label label-success">Fiil</span>,
+	    <span class="label label-success">Ünlem	</span>,
+	    <span class="label label-success">Zarf</span>,
+	    <span class="label label-success">Edat</span>,<br><br>
+	    <span class="label label-success">Zamir</span>,
+	    <span class="label label-success">Bağlaç</span>,
+	    <span class="label label-success">Deyim</span>,
+	    <span class="label label-success">Günler</span>,
+	    <span class="label label-success">Aylar</span>,
+	    <span class="label label-success">Sayılar</span>,<br><br>
+	    <span class="label label-success">Hayvanlar</span>,
+	    <span class="label label-success">Yemekler</span>.
+	    </h5>
+	   {{playcounter}} {{dogri}} {{hatali}}
+
+	    
+	  
+	    
+	   
+	    </div>
+          </section>
+      </div>
+    </div>
+  </section>
+  <!-- footer -->
+  <footer id="footer">
+    <div class="text-center padder clearfix">
+      <p>
+        <small style="font-family: 'Exo 2', sans-serif;"> İngilizce kelime egzersiz'i yaparak ingilizceyi en hızlı şekilde öğrenin.</small><br><br>
+        <a href="#" class="btn btn-xs btn-circle btn-twitter"><i class="icon-twitter"></i></a>
+        <a href="#" class="btn btn-xs btn-circle btn-facebook"><i class="icon-facebook"></i></a>
+        <a href="#" class="btn btn-xs btn-circle btn-gplus"><i class="icon-google-plus"></i></a>
+      </p>
+    </div>
+  </footer>
+  <!-- / footer -->
+	<script src="js/jquery.min.js"></script>
+  <!-- Bootstrap -->
+  <script src="js/bootstrap.js"></script>
+  <!-- app -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js" type="text/javascript"></script>
+  <script src="js/main.js" type="text/javascript"></script>
+  <script src="js/app.js"></script>
+  <script src="js/app.plugin.js"></script>
+  <script src="js/app.data.js"></script>
+</body>
+</html>
