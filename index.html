@@ -26,14 +26,28 @@
             <header style="font-family: 'Exo 2', sans-serif;" class="panel-heading text-center">
              Hoşgeldin.
             </header>
+	    <!--Avatar -->
 	    <div style="position: relative; left: 13px; width: 371px; height: 100px; top: 112px;" id="head">
 	    <img style="position: relative;top:12px;left:14px;" src="images/avatar.png">
 	    <h3 style="font-family: 'Exo 2', sans-serif;color: white;position:relative;left:110px;top:-84px;width:261px;height:28px;">Ziyaretçi</h3>
 	    <h6 style="font-family: 'Exo 2',sans-serif; color: white; position: relative; left: 110px; top: -84px; width: 261px; height: 50px;">İstatisliklerinizi kayıt etmek ve diğer kullanıcılarla tanışmak için aşağıdaki facebook ile giriş yap butonunu kullanın.</h6>
             <span class="label label-info" style="font-family: 'Exo 2',sans-serif;position: relative; top: -181px; left: 72px; font-size:15px;">{{nmbr}}</span>
+	    <span class="label label-info" style="font-family: 'Exo 2',sans-serif; position: relative; font-size: 15px; top: -121px; left: 27px;">{{playcounter}}</span>
 	    </div>
+	    <!--End of Avatar -->
 	    <div id="formcontrol" style="position: relative; left: 13px; width: 371px; height: 400px;top:110px;" >
 	    <div style="position: relative;width: 370px;">
+	    <div class="progress">
+	    <div class="progress-bar progress-bar-success" style="width: {{dogri}}%">
+	    <span >{{dogri}} </span>
+	    </div>
+	    <div class="progress-bar progress-bar-danger" style="width: {{hatali}}%">
+	    <span >{{hatali}} </span>
+	    </div>
+	   
+	    </div>
+
+	   
             <h2 style="text-align: center;" ng-model="people">{{people[Aralik].code}}</h2>
 	    </div>
 	    <input class="form-control" name="google" ng-model="google"  style="position: relative; height: 44px; width: 305px; left: 35px; top: 0px;" type="text" />
@@ -56,7 +70,7 @@
 	    <span class="label label-success">Hayvanlar</span>,
 	    <span class="label label-success">Yemekler</span>.
 	    </h5>
-	   {{playcounter}} {{dogri}} {{hatali}}
+	  
 
 	    
 	  

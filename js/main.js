@@ -123,7 +123,7 @@ app.controller("MainController", function($scope,$interval){
 	$scope.dogri = dogrix;
     $scope.nmbr = $scope.people[$scope.Aralik].decode.length;
     stop = $interval(function() {
-	if (cntr == 98) {
+	if (cntr == 0) {
 		$interval.cancel(stop);
 		alert("tebrikler " + dogrix + " kelime doğru bildiniz.");
 		location.reload();
