@@ -1,6 +1,6 @@
 var app = angular.module('MyTutorialApp',[]);
 app.controller("MainController", function($scope,$interval){
-	$scope.Aralik = Math.floor(Math.random() * 346) + 0;
+	$scope.Aralik = Math.floor(Math.random() * 393) + 0;
 	    $scope.people = [
 				{ id: 0, code: 'number', decode: 'numara' },
 				{ id: 1, code: 'week', decode: 'hafta' },
@@ -394,11 +394,55 @@ app.controller("MainController", function($scope,$interval){
 { id: 343, code: 'worry', decode: 'endişe' },
 { id: 344, code: 'zeal', decode: 'coşku' },
 { id: 345, code: 'zest', decode: 'neşe' },
-{ id: 346, code: 'longing', decode: 'özlem' }
-
-
-
-
+{ id: 346, code: 'longing', decode: 'özlem' },
+{ id: 346, code: 'adaptation', decode: 'adaptasyon' },
+{ id: 347, code: 'evolution', decode: 'evrim' },
+{ id: 348, code: 'growth', decode: 'büyüme' },
+{ id: 349, code: 'development', decode: 'gelişim' },
+{ id: 350, code: 'progress', decode: 'ilerleme' },
+{ id: 351, code: 'innovation', decode: 'yenilik' },
+{ id: 352, code: 'breakthrough', decode: 'çığır açan buluş' },
+{ id: 353, code: 'advancement', decode: 'ilerleme' },
+{ id: 354, code: 'improvement', decode: 'geliştirme' },
+{ id: 355, code: 'transformation', decode: 'dönüşüm' },
+{ id: 356, code: 'discovery', decode: 'keşif' },
+{ id: 357, code: 'exploration', decode: 'keşif gezisi' },
+{ id: 358, code: 'experimentation', decode: 'deney' },
+{ id: 359, code: 'research', decode: 'araştırma' },
+{ id: 360, code: 'study', decode: 'çalışma' },
+{ id: 361, code: 'learning', decode: 'öğrenme' },
+{ id: 362, code: 'understanding', decode: 'anlama' },
+{ id: 363, code: 'knowledge', decode: 'bilgi' },
+{ id: 364, code: 'wisdom', decode: 'bilgelik' },
+{ id: 365, code: 'insight', decode: 'içgörü' },
+{ id: 366, code: 'creativity', decode: 'yaratıcılık' },
+{ id: 367, code: 'imagination', decode: 'hayal gücü' },
+{ id: 368, code: 'originality', decode: 'özgünlük' },
+{ id: 369, code: 'invention', decode: 'icat' },
+{ id: 370, code: 'design', decode: 'tasarım' },
+{ id: 371, code: 'artistry', decode: 'sanatkarlık' },
+{ id: 372, code: 'craftsmanship', decode: 'usta işçilik' },
+{ id: 373, code: 'skill', decode: 'beceri' },
+{ id: 374, code: 'mastery', decode: 'usta' },
+{ id: 375, code: 'expertise', decode: 'uzmanlık' },
+{ id: 376, code: 'challenge', decode: 'meydan okuma' },
+{ id: 377, code: 'endeavor', decode: 'gayret' },
+{ id: 378, code: 'effort', decode: 'çaba' },
+{ id: 379, code: 'commitment', decode: 'bağlılık' },
+{ id: 380, code: 'dedication', decode: 'adama' },
+{ id: 381, code: 'perseverance', decode: 'azim' },
+{ id: 382, code: 'determination', decode: 'kararlılık' },
+{ id: 383, code: 'resilience', decode: 'dayanıklılık' },
+{ id: 384, code: 'fortitude', decode: 'metanet' },
+{ id: 385, code: 'courage', decode: 'cesaret' },
+{ id: 386, code: 'collaboration', decode: 'işbirliği' },
+{ id: 387, code: 'teamwork', decode: 'takım çalışması' },
+{ id: 388, code: 'partnership', decode: 'ortaklık' },
+{ id: 389, code: 'cooperation', decode: 'işbirliği' },
+{ id: 390, code: 'unity', decode: 'birlik' },
+{ id: 391, code: 'harmony', decode: 'uyum' },
+{ id: 392, code: 'synergy', decode: 'sinergi' },
+{ id: 393, code: 'concord', decode: 'uyum' }
 
 
 
@@ -421,7 +465,7 @@ app.controller("MainController", function($scope,$interval){
 	switch ($scope.google.toLowerCase()) {
 		case x.decode.toLowerCase(): //------**DOĞRU BİLDİ****----------+!1
 			$scope.Aralik = Math.floor(Math.random() * 22) + 0;
-			$scope.google.toLowerCase() = "";
+			$scope.google = "";
 			$scope.result = "";
 			cntr--;
 			$scope.playcounter = cntr;
@@ -431,7 +475,7 @@ app.controller("MainController", function($scope,$interval){
 		case "qqq": //-------***BİLEMEDİ****----------!1
 			$scope.Aralik = Math.floor(Math.random() * 22) + 0;
 			$scope.result = x.code +"<=>"+ x.decode.toLowerCase();
-			$scope.google.toLowerCase() = "";
+			$scope.google = "";
 			cntr--;
 			$scope.playcounter = cntr;
 			hatalix++;
@@ -440,7 +484,7 @@ app.controller("MainController", function($scope,$interval){
 		case "www": //-------***İP UCU İSTEDİ****----------!0
 			var xnxxl = $scope.people[$scope.Aralik].decode.length;
 			$scope.result = $scope.people[$scope.Aralik].decode.charAt(0)+"***"+ $scope.people[$scope.Aralik].decode.charAt(xnxxl-1);
-			$scope.google.toLowerCase() = "";
+			$scope.google = "";
 			break;
 		default:
 			if ($scope.google.toLowerCase() == undefined) {
