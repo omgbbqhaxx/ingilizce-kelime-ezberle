@@ -1,6 +1,7 @@
 var app = angular.module('MyTutorialApp',[]);
+var totalword = 393;
 app.controller("MainController", function($scope,$interval){
-	$scope.Aralik = Math.floor(Math.random() * 393) + 0;
+	$scope.Aralik = Math.floor(Math.random() * totalword) + 0;
 	    $scope.people = [
 				{ id: 0, code: 'number', decode: 'numara' },
 				{ id: 1, code: 'week', decode: 'hafta' },
@@ -461,10 +462,16 @@ app.controller("MainController", function($scope,$interval){
 		alert("tebrikler " + dogrix + " kelime doğru bildiniz.");
 		location.reload();
 	}else {
-        var x = $scope.people[$scope.Aralik];
+
+		if ($scope.google) {
+			// $scope.google tanımlı ise bu blok çalışacak
+			var lowerCaseGoogle = $scope.google.toLowerCase();
+			// Diğer işlemler
+		
+    var x = $scope.people[$scope.Aralik];
 	switch ($scope.google.toLowerCase()) {
 		case x.decode.toLowerCase(): //------**DOĞRU BİLDİ****----------+!1
-			$scope.Aralik = Math.floor(Math.random() * 22) + 0;
+			$scope.Aralik = Math.floor(Math.random() * totalword) + 0;
 			$scope.google = "";
 			$scope.result = "";
 			cntr--;
@@ -473,8 +480,8 @@ app.controller("MainController", function($scope,$interval){
 			$scope.dogri = dogrix;
 			break;
 		case "qqq": //-------***BİLEMEDİ****----------!1
-			$scope.Aralik = Math.floor(Math.random() * 22) + 0;
-			$scope.result = x.code +"<=>"+ x.decode.toLowerCase();
+			$scope.Aralik = Math.floor(Math.random() * totalword) + 0;
+			$scope.result = x.code +"<=>"+ x.decode;
 			$scope.google = "";
 			cntr--;
 			$scope.playcounter = cntr;
@@ -487,22 +494,19 @@ app.controller("MainController", function($scope,$interval){
 			$scope.google = "";
 			break;
 		default:
-			if ($scope.google.toLowerCase() == undefined) {
-				var KelimeninHarfSayisi = x.decode.toLowerCase().length;
+			if ($scope.google == undefined) {
+				var KelimeninHarfSayisi = x.decode.length;
 				$scope.nmbr = KelimeninHarfSayisi;
 			}else {
 				
-				var GirilenHarfSayisi =$scope.google.toLowerCase().length;
-				var KelimeninHarfSayisi = x.decode.toLowerCase().length;
+				var GirilenHarfSayisi =$scope.google.length;
+				var KelimeninHarfSayisi = x.decode.length;
 				var SonucRakam = KelimeninHarfSayisi - GirilenHarfSayisi;
-				$scope.nmbr = SonucRakam;
-				
-				
+				$scope.nmbr = SonucRakam;	
 			}
-			
-		
-			
-	}
+	}}  
+
+
         
 	}
     }, 100);

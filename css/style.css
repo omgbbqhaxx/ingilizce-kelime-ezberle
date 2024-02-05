@@ -611,3 +611,16 @@ input[type="text"], select, textarea{min-width: 40px;height: auto;}
   .toolbar a{width:25%;float: left;margin-bottom: 10px}
   .toolbar a:nth-child(5n){clear: left}
 }
+
+ 
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.row {
+  width: 100%; /* İçerik kapsayıcısının tam genişliğini kullanır */
+  margin: 0 auto;
+}
