@@ -1,6 +1,6 @@
 var app = angular.module('MyTutorialApp',[]);
 app.controller("MainController", function($scope,$interval){
-	$scope.Aralik = Math.floor(Math.random() * 22) + 0;
+	$scope.Aralik = Math.floor(Math.random() * 346) + 0;
 	    $scope.people = [
 				{ id: 0, code: 'number', decode: 'numara' },
 				{ id: 1, code: 'week', decode: 'hafta' },
@@ -297,7 +297,106 @@ app.controller("MainController", function($scope,$interval){
 { id: 246, code: 'invention', decode: 'icat' },
 { id: 247, code: 'knowledge', decode: 'bilgi' },
 { id: 248, code: 'education', decode: 'eğitim' },
-{ id: 249, code: 'scholarship', decode: 'burs' }
+{ id: 249, code: 'scholarship', decode: 'burs' },
+{ id: 250, code: 'happiness', decode: 'mutluluk' },
+{ id: 251, code: 'sorrow', decode: 'keder' },
+{ id: 252, code: 'excitement', decode: 'heyecan' },
+{ id: 253, code: 'boredom', decode: 'sıkıntı' },
+{ id: 254, code: 'enthusiasm', decode: 'coşku' },
+{ id: 255, code: 'apathy', decode: 'ilgisizlik' },
+{ id: 256, code: 'curiosity', decode: 'merak' },
+{ id: 257, code: 'indifference', decode: 'kayıtsızlık' },
+{ id: 258, code: 'satisfaction', decode: 'tatmin' },
+{ id: 259, code: 'frustration', decode: 'hayal kırıklığı' },
+{ id: 260, code: 'achievement', decode: 'başarı' },
+{ id: 261, code: 'failure', decode: 'başarısızlık' },
+{ id: 262, code: 'goal', decode: 'amaç' },
+{ id: 263, code: 'obstacle', decode: 'engel' },
+{ id: 264, code: 'opportunity', decode: 'fırsat' },
+{ id: 265, code: 'threat', decode: 'tehdit' },
+{ id: 266, code: 'solution', decode: 'çözüm' },
+{ id: 267, code: 'problem', decode: 'problem' },
+{ id: 268, code: 'advantage', decode: 'avantaj' },
+{ id: 269, code: 'disadvantage', decode: 'dezavantaj' },
+{ id: 270, code: 'cause', decode: 'neden' },
+{ id: 271, code: 'effect', decode: 'etki' },
+{ id: 272, code: 'result', decode: 'sonuç' },
+{ id: 273, code: 'reason', decode: 'sebep' },
+{ id: 274, code: 'purpose', decode: 'amaç' },
+{ id: 275, code: 'intention', decode: 'niyet' },
+{ id: 276, code: 'plan', decode: 'plan' },
+{ id: 277, code: 'strategy', decode: 'strateji' },
+{ id: 278, code: 'tactic', decode: 'taktik' },
+{ id: 279, code: 'method', decode: 'yöntem' },
+{ id: 280, code: 'skill', decode: 'beceri' },
+{ id: 281, code: 'talent', decode: 'yetenek' },
+{ id: 282, code: 'ability', decode: 'kapasite' },
+{ id: 283, code: 'capacity', decode: 'kapasite' },
+{ id: 284, code: 'competence', decode: 'yeterlilik' },
+{ id: 285, code: 'intelligence', decode: 'zeka' },
+{ id: 286, code: 'wisdom', decode: 'bilgelik' },
+{ id: 287, code: 'knowledge', decode: 'bilgi' },
+{ id: 288, code: 'thought', decode: 'düşünce' },
+{ id: 289, code: 'idea', decode: 'fikir' },
+{ id: 290, code: 'imagination', decode: 'hayal gücü' },
+{ id: 291, code: 'creativity', decode: 'yaratıcılık' },
+{ id: 292, code: 'innovation', decode: 'yenilik' },
+{ id: 293, code: 'inspiration', decode: 'ilham' },
+{ id: 294, code: 'vision', decode: 'vizyon' },
+{ id: 295, code: 'dream', decode: 'rüya' },
+{ id: 296, code: 'aspiration', decode: 'arzu' },
+{ id: 297, code: 'ambition', decode: 'hırs' },
+{ id: 298, code: 'goal', decode: 'amaç' },
+{ id: 299, code: 'objective', decode: 'objektif' },
+{ id: 300, code: 'compassion', decode: 'şefkat' },
+{ id: 301, code: 'gratitude', decode: 'minnettarlık' },
+{ id: 302, code: 'loyalty', decode: 'sadakat' },
+{ id: 303, code: 'integrity', decode: 'dürüstlük' },
+{ id: 304, code: 'honor', decode: 'onur' },
+{ id: 305, code: 'bravery', decode: 'cesaret' },
+{ id: 306, code: 'courage', decode: 'cesaret' },
+{ id: 307, code: 'patience', decode: 'sabır' },
+{ id: 308, code: 'generosity', decode: 'cömertlik' },
+{ id: 309, code: 'humility', decode: 'alçakgönüllülük' },
+{ id: 310, code: 'ambivalence', decode: 'kararsızlık' },
+{ id: 311, code: 'optimism', decode: 'iyimserlik' },
+{ id: 312, code: 'pessimism', decode: 'kötümserlik' },
+{ id: 313, code: 'serenity', decode: 'huzur' },
+{ id: 314, code: 'anxiety', decode: 'endişe' },
+{ id: 315, code: 'contentment', decode: 'memnuniyet' },
+{ id: 316, code: 'euphoria', decode: 'coşku' },
+{ id: 317, code: 'melancholy', decode: 'melankoli' },
+{ id: 318, code: 'sympathy', decode: 'duyarlılık' },
+{ id: 319, code: 'empathy', decode: 'empati' },
+{ id: 320, code: 'enthusiasm', decode: 'heves' },
+{ id: 321, code: 'indignation', decode: 'öfke' },
+{ id: 322, code: 'jealousy', decode: 'kıskançlık' },
+{ id: 323, code: 'serendipity', decode: 'talih' },
+{ id: 324, code: 'nostalgia', decode: 'nostalji' },
+{ id: 325, code: 'remorse', decode: 'pişmanlık' },
+{ id: 326, code: 'vigilance', decode: 'dikkat' },
+{ id: 327, code: 'admiration', decode: 'hayranlık' },
+{ id: 328, code: 'contempt', decode: 'küçümseme' },
+{ id: 329, code: 'disappointment', decode: 'hayal kırıklığı' },
+{ id: 330, code: 'eagerness', decode: 'istek' },
+{ id: 331, code: 'elation', decode: 'mutluluk' },
+{ id: 332, code: 'grief', decode: 'keder' },
+{ id: 333, code: 'pride', decode: 'gurur' },
+{ id: 334, code: 'rage', decode: 'öfke' },
+{ id: 335, code: 'regret', decode: 'pişmanlık' },
+{ id: 336, code: 'relief', decode: 'rahatlama' },
+{ id: 337, code: 'remorse', decode: 'pişmanlık' },
+{ id: 338, code: 'resentment', decode: 'dargınlık' },
+{ id: 339, code: 'satisfaction', decode: 'tatmin' },
+{ id: 340, code: 'shock', decode: 'şok' },
+{ id: 341, code: 'surprise', decode: 'sürpriz' },
+{ id: 342, code: 'terror', decode: 'dehşet' },
+{ id: 343, code: 'worry', decode: 'endişe' },
+{ id: 344, code: 'zeal', decode: 'coşku' },
+{ id: 345, code: 'zest', decode: 'neşe' },
+{ id: 346, code: 'longing', decode: 'özlem' }
+
+
 
 
 
@@ -319,10 +418,10 @@ app.controller("MainController", function($scope,$interval){
 		location.reload();
 	}else {
         var x = $scope.people[$scope.Aralik];
-	switch ($scope.google) {
-		case x.decode: //------**DOĞRU BİLDİ****----------+!1
+	switch ($scope.google.toLowerCase()) {
+		case x.decode.toLowerCase(): //------**DOĞRU BİLDİ****----------+!1
 			$scope.Aralik = Math.floor(Math.random() * 22) + 0;
-			$scope.google = "";
+			$scope.google.toLowerCase() = "";
 			$scope.result = "";
 			cntr--;
 			$scope.playcounter = cntr;
@@ -331,8 +430,8 @@ app.controller("MainController", function($scope,$interval){
 			break;
 		case "qqq": //-------***BİLEMEDİ****----------!1
 			$scope.Aralik = Math.floor(Math.random() * 22) + 0;
-			$scope.result = x.code +"<=>"+ x.decode;
-			$scope.google = "";
+			$scope.result = x.code +"<=>"+ x.decode.toLowerCase();
+			$scope.google.toLowerCase() = "";
 			cntr--;
 			$scope.playcounter = cntr;
 			hatalix++;
@@ -341,16 +440,16 @@ app.controller("MainController", function($scope,$interval){
 		case "www": //-------***İP UCU İSTEDİ****----------!0
 			var xnxxl = $scope.people[$scope.Aralik].decode.length;
 			$scope.result = $scope.people[$scope.Aralik].decode.charAt(0)+"***"+ $scope.people[$scope.Aralik].decode.charAt(xnxxl-1);
-			$scope.google = "";
+			$scope.google.toLowerCase() = "";
 			break;
 		default:
-			if ($scope.google == undefined) {
-				var KelimeninHarfSayisi = x.decode.length;
+			if ($scope.google.toLowerCase() == undefined) {
+				var KelimeninHarfSayisi = x.decode.toLowerCase().length;
 				$scope.nmbr = KelimeninHarfSayisi;
 			}else {
 				
-				var GirilenHarfSayisi =$scope.google.length;
-				var KelimeninHarfSayisi = x.decode.length;
+				var GirilenHarfSayisi =$scope.google.toLowerCase().length;
+				var KelimeninHarfSayisi = x.decode.toLowerCase().length;
 				var SonucRakam = KelimeninHarfSayisi - GirilenHarfSayisi;
 				$scope.nmbr = SonucRakam;
 				
