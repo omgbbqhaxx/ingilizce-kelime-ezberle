@@ -1,5 +1,5 @@
 var app = angular.module('MyTutorialApp',[]);
-var totalword = 393;
+var totalword = 82;
 app.controller("MainController", function($scope,$interval){
 	$scope.Aralik = Math.floor(Math.random() * totalword) + 0;
 	    $scope.people = [
