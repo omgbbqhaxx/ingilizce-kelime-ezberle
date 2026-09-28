@@ -10,8 +10,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Alegreya+Sans:wght@500;700;800&display=swap" rel="stylesheet">
-  <link rel="preload" as="image" href="images/maskot.webp?v=4.8">
-  <link rel="stylesheet" href="css/quiz.css?v=4.8">
+  <link rel="preload" as="image" href="images/maskot.webp?v=4.9">
+  <link rel="stylesheet" href="css/quiz.css?v=4.9">
 
   <link rel="apple-touch-icon" sizes="57x57" href="static/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="static/apple-icon-60x60.png">
@@ -55,57 +55,86 @@
         <svg class="ses-kapali-ikon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M17 9l5 6M22 9l-5 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       </button>
 
-      <div class="maskot-sahne">
-        <svg class="rune-cember" viewBox="0 0 200 200" aria-hidden="true">
-          <circle cx="100" cy="100" r="94" fill="none" stroke="currentColor" stroke-width="1.5"/>
-          <circle cx="100" cy="100" r="84" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="2 6"/>
-          <circle cx="100" cy="100" r="72" fill="none" stroke="currentColor" stroke-width="1"/>
-          <path d="M100 6 L181 147 L19 147 Z M100 194 L19 53 L181 53 Z" fill="none" stroke="currentColor" stroke-width="1" opacity=".7"/>
-        </svg>
-        <img class="maskot maskot-yuzen" src="images/maskot.webp?v=4.8" alt="" width="512" height="512">
+      <header class="giris-baslik">
+        <div class="maskot-sahne">
+          <svg class="rune-cember" viewBox="0 0 200 200" aria-hidden="true">
+            <circle cx="100" cy="100" r="94" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="100" cy="100" r="84" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="2 6"/>
+            <circle cx="100" cy="100" r="72" fill="none" stroke="currentColor" stroke-width="1"/>
+            <path d="M100 6 L181 147 L19 147 Z M100 194 L19 53 L181 53 Z" fill="none" stroke="currentColor" stroke-width="1" opacity=".7"/>
+          </svg>
+          <img class="maskot maskot-yuzen" src="images/maskot.webp?v=4.9" alt="" width="512" height="512">
+        </div>
+        <h1 id="baslik">Kelime Ezberle</h1>
+        <p class="alt-baslik">Seviyeni seç, 40.000 kelimelik büyü kitabını öğren.</p>
+      </header>
+
+      <div class="pencere">
+        <div class="pencere-plaka">Seviyeler</div>
+        <div class="seviye-liste" role="radiogroup" aria-label="Seviye">
+          <button type="button" role="radio" class="seviye" data-seviye="1" aria-checked="true">
+            <span class="ikon-yuva"><span class="seviye-no">1</span></span>
+            <span class="seviye-govde">
+              <span class="seviye-ad">Çırak</span>
+              <span class="skill-bar" aria-hidden="true"><i></i><span class="seviye-sayi"></span></span>
+            </span>
+          </button>
+          <button type="button" role="radio" class="seviye" data-seviye="2" aria-checked="false">
+            <span class="ikon-yuva"><span class="seviye-no">2</span></span>
+            <span class="seviye-govde">
+              <span class="seviye-ad">Kalfa</span>
+              <span class="skill-bar" aria-hidden="true"><i></i><span class="seviye-sayi"></span></span>
+            </span>
+          </button>
+          <button type="button" role="radio" class="seviye" data-seviye="3" aria-checked="false">
+            <span class="ikon-yuva"><span class="seviye-no">3</span></span>
+            <span class="seviye-govde">
+              <span class="seviye-ad">Usta</span>
+              <span class="skill-bar" aria-hidden="true"><i></i><span class="seviye-sayi"></span></span>
+            </span>
+          </button>
+          <button type="button" role="radio" class="seviye" data-seviye="4" aria-checked="false">
+            <span class="ikon-yuva"><span class="seviye-no">4</span></span>
+            <span class="seviye-govde">
+              <span class="seviye-ad">Başbüyücü</span>
+              <span class="skill-bar" aria-hidden="true"><i></i><span class="seviye-sayi"></span></span>
+            </span>
+          </button>
+          <button type="button" role="radio" class="seviye" data-seviye="5" aria-checked="false">
+            <span class="ikon-yuva"><span class="seviye-no">5</span></span>
+            <span class="seviye-govde">
+              <span class="seviye-ad">Efsanevi</span>
+              <span class="skill-bar" aria-hidden="true"><i></i><span class="seviye-sayi"></span></span>
+            </span>
+          </button>
+        </div>
+        <div class="pencere-alt">
+          <button class="btn btn-buyuk" id="basla-btn" type="button">Maceraya başla</button>
+          <p class="seviye-bitti" id="seviye-bitti" role="status" hidden>
+            Bu seviyedeki bütün kelimeleri öğrendin! 🏆 Bir üst seviyeye geç ya da
+            <button class="btn-metin" id="sifirla-btn" type="button">seviyeyi sıfırla</button>
+          </p>
+          <p class="yukleme-hata" id="yukleme-hata" role="alert" hidden>Büyü kitabı açılamadı. İnternet bağlantını kontrol edip tekrar dene.</p>
+        </div>
       </div>
 
-      <h1 id="baslik">Kelime Ezberle</h1>
-      <p class="alt-baslik">40.000 kelimelik büyü kitabı seni bekliyor. Seviyeni seç, maceraya başla.</p>
-
-      <div class="seviye-secici" role="radiogroup" aria-label="Seviye">
-        <button type="button" role="radio" class="seviye" data-seviye="1" aria-checked="true">
-          <span class="seviye-no">1</span><span class="seviye-ad">Çırak</span><span class="seviye-sayi"></span><span class="seviye-bar" aria-hidden="true"><i></i></span>
-        </button>
-        <button type="button" role="radio" class="seviye" data-seviye="2" aria-checked="false">
-          <span class="seviye-no">2</span><span class="seviye-ad">Kalfa</span><span class="seviye-sayi"></span><span class="seviye-bar" aria-hidden="true"><i></i></span>
-        </button>
-        <button type="button" role="radio" class="seviye" data-seviye="3" aria-checked="false">
-          <span class="seviye-no">3</span><span class="seviye-ad">Usta</span><span class="seviye-sayi"></span><span class="seviye-bar" aria-hidden="true"><i></i></span>
-        </button>
-        <button type="button" role="radio" class="seviye" data-seviye="4" aria-checked="false">
-          <span class="seviye-no">4</span><span class="seviye-ad">Başbüyücü</span><span class="seviye-sayi"></span><span class="seviye-bar" aria-hidden="true"><i></i></span>
-        </button>
-        <button type="button" role="radio" class="seviye" data-seviye="5" aria-checked="false">
-          <span class="seviye-no">5</span><span class="seviye-ad">Efsanevi</span><span class="seviye-sayi"></span><span class="seviye-bar" aria-hidden="true"><i></i></span>
-        </button>
-      </div>
-
-      <button class="btn btn-buyuk" id="basla-btn" type="button">Maceraya başla</button>
-      <p class="seviye-bitti" id="seviye-bitti" role="status" hidden>
-        Bu seviyedeki bütün kelimeleri öğrendin! 🏆 Bir üst seviyeye geç ya da
-        <button class="btn-metin" id="sifirla-btn" type="button">seviyeyi sıfırla</button>
-      </p>
-      <p class="yukleme-hata" id="yukleme-hata" role="alert" hidden>Büyü kitabı açılamadı. İnternet bağlantını kontrol edip tekrar dene.</p>
-      <div class="genel-xp" id="genel-xp" hidden>
-        <div class="genel-xp-ust"><span>Genel ilerleme</span><span id="genel-yuzde"></span></div>
-        <div class="skill-bar skill-bar-buyuk" role="progressbar" aria-label="Genel ilerleme" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="genel-bar">
+      <div class="xp-serit" id="genel-xp" hidden>
+        <div class="xp-serit-ust"><span>Genel ilerleme</span><span id="genel-yuzde"></span></div>
+        <div class="skill-bar skill-bar-buyuk skill-bar-xp" role="progressbar" aria-label="Genel ilerleme" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="genel-bar">
           <i id="genel-dolgu"></i><span id="genel-ogrenilen"></span>
         </div>
       </div>
-      <p class="ipucu-klavye">İpucu: klavyede <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> ile seçebilirsin.</p>
-      <p class="kaynak">Sözlük: <a href="https://www.wiktionary.org/" target="_blank" rel="noopener">Wiktionary</a> / <a href="https://www.wikdict.com/" target="_blank" rel="noopener">WikDict</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.tr" target="_blank" rel="noopener">CC BY-SA 4.0</a></p>
-      <a class="github" href="https://github.com/omgbbqhaxx/ingilizce-kelime-ezberle" target="_blank" rel="noopener">
-        <svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-        <span>Açık kaynak — GitHub'da incele, katkıda bulun</span>
-      </a>
-      <p class="powered">Powered by <a href="https://flooor.fun" target="_blank" rel="noopener">flooor.fun</a></p>
-      <p class="surum" data-surum></p>
+
+      <footer class="alt-bilgi">
+        <p class="ipucu-klavye">İpucu: klavyede <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> ile seçebilirsin.</p>
+        <p class="kaynak">Sözlük: <a href="https://www.wiktionary.org/" target="_blank" rel="noopener">Wiktionary</a> / <a href="https://www.wikdict.com/" target="_blank" rel="noopener">WikDict</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.tr" target="_blank" rel="noopener">CC BY-SA 4.0</a></p>
+        <a class="github" href="https://github.com/omgbbqhaxx/ingilizce-kelime-ezberle" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          <span>Açık kaynak — GitHub'da incele, katkıda bulun</span>
+        </a>
+        <p class="powered">Powered by <a href="https://flooor.fun" target="_blank" rel="noopener">flooor.fun</a></p>
+        <p class="surum" data-surum></p>
+      </footer>
     </section>
 
     <!-- ===== Soru ===== -->
@@ -148,7 +177,7 @@
           <circle cx="100" cy="100" r="84" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="2 6"/>
           <path d="M100 6 L181 147 L19 147 Z M100 194 L19 53 L181 53 Z" fill="none" stroke="currentColor" stroke-width="1" opacity=".7"/>
         </svg>
-        <img class="maskot maskot-zipla" src="images/maskot.webp?v=4.8" alt="" width="512" height="512">
+        <img class="maskot maskot-zipla" src="images/maskot.webp?v=4.9" alt="" width="512" height="512">
       </div>
       <p class="gorev-etiket">Görev tamamlandı</p>
       <h1 id="sonuc-baslik"></h1>
@@ -202,7 +231,7 @@
   <!-- Çıkış onayı -->
   <div class="modal-arka" id="cikis-modal" hidden>
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-baslik">
-      <img class="maskot maskot-kucuk" src="images/maskot.webp?v=4.8" alt="" width="512" height="512">
+      <img class="maskot maskot-kucuk" src="images/maskot.webp?v=4.9" alt="" width="512" height="512">
       <h3 id="modal-baslik">Görevi bırakıyor musun?</h3>
       <p>Çıkarsan bu görevdeki ilerlemen kaybolur.</p>
       <button class="btn btn-buyuk" id="modal-kal-btn" type="button">Göreve devam et</button>
@@ -226,6 +255,6 @@
 
   <canvas class="konfeti" id="konfeti" aria-hidden="true"></canvas>
 
-  <script src="js/quiz.js?v=4.8"></script>
+  <script src="js/quiz.js?v=4.9"></script>
 </body>
 </html>

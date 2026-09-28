@@ -116,8 +116,8 @@
       var toplam = toplamSayi(s);
       if (!toplam) return;
       var kalan = kalanSayi(s);
-      b.querySelector('.seviye-sayi').textContent = kalan === 0 ? 'Tamamlandı ✓' : sayiYaz(toplam - kalan) + ' / ' + sayiYaz(toplam);
-      b.querySelector('.seviye-bar i').style.width = ((toplam - kalan) / toplam * 100) + '%';
+      b.querySelector('.seviye-sayi').textContent = sayiYaz(toplam - kalan) + ' / ' + sayiYaz(toplam);
+      b.querySelector('.skill-bar i').style.width = ((toplam - kalan) / toplam * 100) + '%';
       b.classList.toggle('tamam', kalan === 0);
     });
     genelIlerlemeyiGuncelle();
