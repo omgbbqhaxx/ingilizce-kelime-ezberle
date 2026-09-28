@@ -666,7 +666,7 @@
 ["hospital", ["hastane", "emlerge", "sayrılarevi"]],
 ["loss", ["kayıp"]],
 ["modern", ["modern", "muasır", "çağcıl", "çağdaş"]],
-["paper", ["kâğıt", "kağıt", "evrak", "makale"]],
+["paper", ["kâğıt", "evrak", "makale", "çönge"]],
 ["popular", ["popüler"]],
 ["safe", ["güvenli", "emin", "kasa", "güvenilir"]],
 ["version", ["versiyon", "sürüm"]],

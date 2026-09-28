@@ -9,7 +9,8 @@
   // Sürüm, index.html'deki quiz.js?v=... değerinden okunur; sürüm yalnızca orada güncellenir.
   var SURUM = document.currentScript && new URL(document.currentScript.src).searchParams.get('v');
 
-  var OVGULER = ['Harika!', 'Süper!', 'Mükemmel!', 'Aynen öyle!', 'Çok iyi!', 'Tam isabet!'];
+  var XP_PUANI = 10;             // doğru cevap başına
+  var OVGULER = ['Kritik vuruş!', 'Tam isabet!', 'Büyü tuttu!', 'Harika!', 'Destansı!', 'Kusursuz!'];
 
   var $ = function (id) { return document.getElementById(id); };
 
@@ -179,7 +180,7 @@
     var btn = $('basla-btn');
     if (btn.classList.contains('yukleniyor')) return;
     btn.classList.add('yukleniyor');
-    btn.textContent = 'Yükleniyor…';
+    btn.textContent = 'Büyü kitabı açılıyor…';
     $('yukleme-hata').hidden = true;
     sozlukYukle(seviye)
       .then(function () { dersBaslat(); })
@@ -189,7 +190,7 @@
       })
       .then(function () {
         btn.classList.remove('yukleniyor');
-        btn.textContent = 'Başla';
+        btn.textContent = 'Maceraya başla';
       });
   }
 
@@ -264,6 +265,7 @@
     if (dogruMu) {
       ders.dogru++;
       ders.seri++;
+      xpYazisiGoster(secilenBtn);
       seriyiGuncelle(true);
       if (ders.seri % SERI_ROZET_ARALIGI === 0) {
         seriRozetiGoster(ders.seri);
@@ -293,9 +295,17 @@
     if (arttiMi) animasyonuYenidenBaslat(seri, 'zipla');
   }
 
+  function xpYazisiGoster(btn) {
+    var yazi = document.createElement('span');
+    yazi.className = 'xp-ucan';
+    yazi.setAttribute('aria-hidden', 'true');
+    yazi.textContent = '+' + XP_PUANI + ' XP';
+    btn.appendChild(yazi);
+  }
+
   function seriRozetiGoster(sayi) {
     var rozet = $('seri-rozet');
-    rozet.textContent = '🔥 ' + sayi + ' üst üste!';
+    rozet.textContent = '🔥 Kombo ×' + sayi;
     animasyonuYenidenBaslat(rozet, 'goster');
   }
 
@@ -330,10 +340,10 @@
     var saniye = Math.round((Date.now() - ders.baslangic) / 1000);
 
     var baslik, alt;
-    if (basari === 100) { baslik = 'Kusursuz!'; alt = 'Hiç hata yapmadın, efsanesin.'; }
-    else if (basari >= 80) { baslik = 'Harika iş!'; alt = 'Kelimeler yerine oturuyor.'; }
-    else if (basari >= 50) { baslik = 'İyi gidiyorsun!'; alt = 'Biraz daha tekrarla, tamamdır.'; }
-    else { baslik = 'Pes etmek yok!'; alt = 'Her tekrar seni bir adım ileri taşır.'; }
+    if (basari === 100) { baslik = 'Efsanevi!'; alt = 'Hiç hata yok. Bu büyü kitabı artık senin.'; }
+    else if (basari >= 80) { baslik = 'Destansı!'; alt = 'Kelimeler emrine amade.'; }
+    else if (basari >= 50) { baslik = 'İyi savaştın!'; alt = 'Biraz daha antrenmanla ustalaşacaksın.'; }
+    else { baslik = 'Pes etmek yok!'; alt = 'Her görev seni bir seviye ileri taşır.'; }
     $('sonuc-baslik').textContent = baslik;
     $('sonuc-alt').textContent = alt;
 
@@ -357,6 +367,7 @@
     // sıçrama animasyonunun her derste yeniden oynaması için
     animasyonuYenidenBaslat(document.querySelector('.ekran-sonuc .maskot'), 'maskot-zipla');
 
+    say($('sonuc-xp'), ders.dogru * XP_PUANI, function (n) { return '+' + n + ' XP'; });
     say($('istat-dogru'), ders.dogru, function (n) { return n + '/' + toplam; });
     say($('istat-basari'), basari, function (n) { return n + '%'; });
     say($('istat-sure'), saniye, function (n) {
@@ -395,7 +406,7 @@
     tuval.height = y * oran;
     ctx.scale(oran, oran);
 
-    var renkler = ['#58cc02', '#1cb0f6', '#ff9600', '#ffc800', '#ff4b4b', '#ce82ff'];
+    var renkler = ['#ffd100', '#f2c14e', '#4fd8ff', '#a335ee', '#ff8000', '#1eff00'];
     var parcalar = [];
     for (var i = 0; i < 140; i++) {
       var aci = -Math.PI / 2 + (Math.random() - 0.5) * 1.6;

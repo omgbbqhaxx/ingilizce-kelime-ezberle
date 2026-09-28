@@ -3,14 +3,15 @@
 <head>
   <meta charset="utf-8">
   <title>İngilizce Kelime Ezberleme</title>
-  <meta name="description" content="40.000 İngilizce kelimeyi 5 seviyede, 3 seçenekli hızlı testlerle eğlenerek ezberle.">
+  <meta name="description" content="40.000 İngilizce kelimeyi 5 seviyede, 3 seçenekli hızlı görevlerle oyun oynar gibi ezberle.">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#58cc02">
+  <meta name="theme-color" content="#120e1f">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/quiz.css?v=3.0">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Alegreya+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="images/maskot.webp">
+  <link rel="stylesheet" href="css/quiz.css?v=4.0">
 
   <link rel="apple-touch-icon" sizes="57x57" href="static/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="static/apple-icon-60x60.png">
@@ -26,7 +27,7 @@
   <link rel="icon" type="image/png" sizes="96x96" href="static/favicon-96x96.png">
   <link rel="icon" type="image/png" sizes="16x16" href="static/favicon-16x16.png">
   <link rel="manifest" href="static/manifest.json">
-  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileColor" content="#120e1f">
   <meta name="msapplication-TileImage" content="static/ms-icon-144x144.png">
 
   <!-- Google tag (gtag.js) -->
@@ -40,24 +41,10 @@
 </head>
 <body>
 
-  <!-- Maskot: sayfada birkaç yerde <use href="#maskot"> ile kullanılıyor -->
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-    <symbol id="maskot" viewBox="0 0 120 120">
-      <path d="M20 14h80a14 14 0 0 1 14 14v52a14 14 0 0 1-14 14H56l-20 18v-18H20A14 14 0 0 1 6 80V28a14 14 0 0 1 14-14z" fill="#58cc02"/>
-      <path d="M20 14h80a14 14 0 0 1 14 14v6H6v-6a14 14 0 0 1 14-14z" fill="#89e219" opacity=".55"/>
-      <g class="maskot-gozler">
-        <ellipse cx="42" cy="50" rx="13" ry="15" fill="#fff"/>
-        <ellipse cx="78" cy="50" rx="13" ry="15" fill="#fff"/>
-        <circle cx="45" cy="53" r="6.5" fill="#3c3c3c"/>
-        <circle cx="81" cy="53" r="6.5" fill="#3c3c3c"/>
-        <circle cx="47" cy="50" r="2.2" fill="#fff"/>
-        <circle cx="83" cy="50" r="2.2" fill="#fff"/>
-      </g>
-      <path d="M48 72q12 11 24 0" fill="none" stroke="#3c3c3c" stroke-width="4.5" stroke-linecap="round"/>
-      <ellipse cx="30" cy="70" rx="6" ry="3.5" fill="#ff86d0" opacity=".45"/>
-      <ellipse cx="90" cy="70" rx="6" ry="3.5" fill="#ff86d0" opacity=".45"/>
-    </symbol>
-  </svg>
+  <!-- Arka planda süzülen büyü zerreleri -->
+  <div class="zerreler" aria-hidden="true">
+    <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+  </div>
 
   <main class="uygulama">
 
@@ -68,30 +55,39 @@
         <svg class="ses-kapali-ikon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M17 9l5 6M22 9l-5 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       </button>
 
-      <svg class="maskot maskot-yuzen" viewBox="0 0 120 120" aria-hidden="true"><use href="#maskot"/></svg>
+      <div class="maskot-sahne">
+        <svg class="rune-cember" viewBox="0 0 200 200" aria-hidden="true">
+          <circle cx="100" cy="100" r="94" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="100" cy="100" r="84" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="2 6"/>
+          <circle cx="100" cy="100" r="72" fill="none" stroke="currentColor" stroke-width="1"/>
+          <path d="M100 6 L181 147 L19 147 Z M100 194 L19 53 L181 53 Z" fill="none" stroke="currentColor" stroke-width="1" opacity=".7"/>
+        </svg>
+        <img class="maskot maskot-yuzen" src="images/maskot.webp" alt="" width="512" height="512">
+      </div>
+
       <h1 id="baslik">Kelime Ezberle</h1>
-      <p class="alt-baslik">40.000 kelime, 5 seviye, her derste 3 seçenek.</p>
+      <p class="alt-baslik">40.000 kelimelik büyü kitabı seni bekliyor. Seviyeni seç, maceraya başla.</p>
 
       <div class="seviye-secici" role="radiogroup" aria-label="Seviye">
         <button type="button" role="radio" class="seviye" data-seviye="1" aria-checked="true">
-          <span class="seviye-no">1</span><span class="seviye-ad">Başlangıç</span><span class="seviye-sayi"></span>
+          <span class="seviye-no">1</span><span class="seviye-ad">Çırak</span><span class="seviye-sayi"></span>
         </button>
         <button type="button" role="radio" class="seviye" data-seviye="2" aria-checked="false">
-          <span class="seviye-no">2</span><span class="seviye-ad">Temel</span><span class="seviye-sayi"></span>
+          <span class="seviye-no">2</span><span class="seviye-ad">Kalfa</span><span class="seviye-sayi"></span>
         </button>
         <button type="button" role="radio" class="seviye" data-seviye="3" aria-checked="false">
-          <span class="seviye-no">3</span><span class="seviye-ad">Orta</span><span class="seviye-sayi"></span>
+          <span class="seviye-no">3</span><span class="seviye-ad">Usta</span><span class="seviye-sayi"></span>
         </button>
         <button type="button" role="radio" class="seviye" data-seviye="4" aria-checked="false">
-          <span class="seviye-no">4</span><span class="seviye-ad">İleri</span><span class="seviye-sayi"></span>
+          <span class="seviye-no">4</span><span class="seviye-ad">Başbüyücü</span><span class="seviye-sayi"></span>
         </button>
         <button type="button" role="radio" class="seviye" data-seviye="5" aria-checked="false">
-          <span class="seviye-no">5</span><span class="seviye-ad">Uzman</span><span class="seviye-sayi"></span>
+          <span class="seviye-no">5</span><span class="seviye-ad">Efsanevi</span><span class="seviye-sayi"></span>
         </button>
       </div>
 
-      <button class="btn btn-yesil btn-buyuk" id="basla-btn" type="button">Başla</button>
-      <p class="yukleme-hata" id="yukleme-hata" role="alert" hidden>Kelimeler yüklenemedi. İnternet bağlantını kontrol edip tekrar dene.</p>
+      <button class="btn btn-buyuk" id="basla-btn" type="button">Maceraya başla</button>
+      <p class="yukleme-hata" id="yukleme-hata" role="alert" hidden>Büyü kitabı açılamadı. İnternet bağlantını kontrol edip tekrar dene.</p>
       <p class="ipucu-klavye">İpucu: klavyede <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> ile seçebilirsin.</p>
       <p class="kaynak">Sözlük: <a href="https://www.wiktionary.org/" target="_blank" rel="noopener">Wiktionary</a> / <a href="https://www.wikdict.com/" target="_blank" rel="noopener">WikDict</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.tr" target="_blank" rel="noopener">CC BY-SA 4.0</a></p>
       <p class="surum" data-surum></p>
@@ -100,13 +96,13 @@
     <!-- ===== Soru ===== -->
     <section class="ekran ekran-soru" id="ekran-soru" aria-label="Soru">
       <header class="ust-cubuk">
-        <button class="ikon-btn" id="kapat-btn" type="button" aria-label="Dersten çık">
+        <button class="ikon-btn" id="kapat-btn" type="button" aria-label="Görevden çık">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
         </button>
         <div class="ilerleme" role="progressbar" aria-label="İlerleme" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="ilerleme">
           <div class="ilerleme-dolgu" id="ilerleme-dolgu"></div>
         </div>
-        <div class="seri" id="seri" title="Üst üste doğru">
+        <div class="seri" id="seri" title="Kombo: üst üste doğru">
           <span class="seri-alev" aria-hidden="true">🔥</span><span id="seri-sayi">0</span>
         </div>
       </header>
@@ -121,14 +117,22 @@
         </div>
         <div class="secenekler" id="secenekler"></div>
       </div>
-
     </section>
 
     <!-- ===== Sonuç ===== -->
     <section class="ekran ekran-sonuc" id="ekran-sonuc" aria-labelledby="sonuc-baslik">
-      <svg class="maskot maskot-zipla" viewBox="0 0 120 120" aria-hidden="true"><use href="#maskot"/></svg>
+      <div class="maskot-sahne maskot-sahne-kucuk">
+        <svg class="rune-cember" viewBox="0 0 200 200" aria-hidden="true">
+          <circle cx="100" cy="100" r="94" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="100" cy="100" r="84" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="2 6"/>
+          <path d="M100 6 L181 147 L19 147 Z M100 194 L19 53 L181 53 Z" fill="none" stroke="currentColor" stroke-width="1" opacity=".7"/>
+        </svg>
+        <img class="maskot maskot-zipla" src="images/maskot.webp" alt="" width="512" height="512">
+      </div>
+      <p class="gorev-etiket">Görev tamamlandı</p>
       <h1 id="sonuc-baslik"></h1>
       <p class="alt-baslik" id="sonuc-alt"></p>
+      <p class="sonuc-xp" id="sonuc-xp">+0 XP</p>
 
       <div class="istatistikler">
         <div class="istat istat-yesil"><span class="istat-ad">Doğru</span><span class="istat-deger" id="istat-dogru">0</span></div>
@@ -142,8 +146,8 @@
       </div>
 
       <div class="sonuc-butonlar">
-        <button class="btn btn-yesil btn-buyuk" id="yeni-ders-btn" type="button">Yeni ders</button>
-        <button class="btn btn-mavi-cizgi btn-buyuk" id="yanlislar-btn" type="button">Yanlışları tekrarla</button>
+        <button class="btn btn-buyuk" id="yeni-ders-btn" type="button">Yeni görev</button>
+        <button class="btn btn-ikincil btn-buyuk" id="yanlislar-btn" type="button">Yanlışları tekrarla</button>
         <button class="btn-metin" id="ana-sayfa-btn" type="button">Ana sayfa</button>
       </div>
       <p class="surum" data-surum></p>
@@ -172,16 +176,16 @@
   <!-- Çıkış onayı -->
   <div class="modal-arka" id="cikis-modal" hidden>
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-baslik">
-      <svg class="maskot maskot-kucuk" viewBox="0 0 120 120" aria-hidden="true"><use href="#maskot"/></svg>
-      <h3 id="modal-baslik">Gitme, az kaldı!</h3>
-      <p>Çıkarsan bu dersteki ilerlemen kaybolur.</p>
-      <button class="btn btn-yesil btn-buyuk" id="modal-kal-btn" type="button">Derse devam et</button>
+      <img class="maskot maskot-kucuk" src="images/maskot.webp" alt="" width="512" height="512">
+      <h3 id="modal-baslik">Görevi bırakıyor musun?</h3>
+      <p>Çıkarsan bu görevdeki ilerlemen kaybolur.</p>
+      <button class="btn btn-buyuk" id="modal-kal-btn" type="button">Göreve devam et</button>
       <button class="btn-metin btn-metin-kirmizi" id="modal-cik-btn" type="button">Çık</button>
     </div>
   </div>
 
   <canvas class="konfeti" id="konfeti" aria-hidden="true"></canvas>
 
-  <script src="js/quiz.js?v=3.0"></script>
+  <script src="js/quiz.js?v=4.0"></script>
 </body>
 </html>

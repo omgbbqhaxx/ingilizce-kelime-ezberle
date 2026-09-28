@@ -71,6 +71,13 @@ def ceviriyi_temizle(tr):
     return tr
 
 
+SADE = str.maketrans("çğıöşüâîûÇĞİÖŞÜÂÎÛ", "cgiosuaiuCGIOSUAIU")
+
+
+def sadelestir(tr):
+    return tr.translate(SADE).lower()
+
+
 def ingilizce_uygun_mu(en):
     return bool(INGILIZCE_KELIME.match(en)) and len(en.split()) <= 3
 
@@ -83,7 +90,8 @@ def main(en_tr_yolu, tr_en_yolu):
         if not tr:
             return
         liste = sozluk.setdefault(en, [])
-        if tr.lower() not in (t.lower() for t in liste):
+        # "gelişigüzel" varken Türkçe karaktersiz "gelisiguzel" yazımı eklenmesin
+        if sadelestir(tr) not in (sadelestir(t) for t in liste):
             liste.append(tr)
 
     # 1) İngilizce -> Türkçe (ana kaynak)
