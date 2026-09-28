@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <title>İngilizce Kelime Ezberleme</title>
-  <meta name="description" content="İngilizce kelimeleri 3 seçenekli hızlı testlerle eğlenerek ezberle. Kolay ve zor kelime modları.">
+  <meta name="description" content="40.000 İngilizce kelimeyi 5 seviyede, 3 seçenekli hızlı testlerle eğlenerek ezberle.">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#58cc02">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/quiz.css?v=2.1">
+  <link rel="stylesheet" href="css/quiz.css?v=3.0">
 
   <link rel="apple-touch-icon" sizes="57x57" href="static/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="static/apple-icon-60x60.png">
@@ -70,21 +70,30 @@
 
       <svg class="maskot maskot-yuzen" viewBox="0 0 120 120" aria-hidden="true"><use href="#maskot"/></svg>
       <h1 id="baslik">Kelime Ezberle</h1>
-      <p class="alt-baslik">Her gün birkaç dakika, 3 seçenek, sınırsız kelime.</p>
+      <p class="alt-baslik">40.000 kelime, 5 seviye, her derste 3 seçenek.</p>
 
-      <div class="mod-secici" role="radiogroup" aria-label="Zorluk">
-        <button type="button" role="radio" class="mod" data-mod="kolay" aria-checked="true">
-          <span class="mod-ad">Kolay</span>
-          <span class="mod-sayi" id="sayi-kolay"></span>
+      <div class="seviye-secici" role="radiogroup" aria-label="Seviye">
+        <button type="button" role="radio" class="seviye" data-seviye="1" aria-checked="true">
+          <span class="seviye-no">1</span><span class="seviye-ad">Başlangıç</span><span class="seviye-sayi"></span>
         </button>
-        <button type="button" role="radio" class="mod" data-mod="zor" aria-checked="false">
-          <span class="mod-ad">Zor</span>
-          <span class="mod-sayi" id="sayi-zor"></span>
+        <button type="button" role="radio" class="seviye" data-seviye="2" aria-checked="false">
+          <span class="seviye-no">2</span><span class="seviye-ad">Temel</span><span class="seviye-sayi"></span>
+        </button>
+        <button type="button" role="radio" class="seviye" data-seviye="3" aria-checked="false">
+          <span class="seviye-no">3</span><span class="seviye-ad">Orta</span><span class="seviye-sayi"></span>
+        </button>
+        <button type="button" role="radio" class="seviye" data-seviye="4" aria-checked="false">
+          <span class="seviye-no">4</span><span class="seviye-ad">İleri</span><span class="seviye-sayi"></span>
+        </button>
+        <button type="button" role="radio" class="seviye" data-seviye="5" aria-checked="false">
+          <span class="seviye-no">5</span><span class="seviye-ad">Uzman</span><span class="seviye-sayi"></span>
         </button>
       </div>
 
       <button class="btn btn-yesil btn-buyuk" id="basla-btn" type="button">Başla</button>
+      <p class="yukleme-hata" id="yukleme-hata" role="alert" hidden>Kelimeler yüklenemedi. İnternet bağlantını kontrol edip tekrar dene.</p>
       <p class="ipucu-klavye">İpucu: klavyede <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> ile seçebilirsin.</p>
+      <p class="kaynak">Sözlük: <a href="https://www.wiktionary.org/" target="_blank" rel="noopener">Wiktionary</a> / <a href="https://www.wikdict.com/" target="_blank" rel="noopener">WikDict</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.tr" target="_blank" rel="noopener">CC BY-SA 4.0</a></p>
       <p class="surum" data-surum></p>
     </section>
 
@@ -173,7 +182,6 @@
 
   <canvas class="konfeti" id="konfeti" aria-hidden="true"></canvas>
 
-  <script src="js/kelimeler.js?v=2.1"></script>
-  <script src="js/quiz.js?v=2.1"></script>
+  <script src="js/quiz.js?v=3.0"></script>
 </body>
 </html>
