@@ -1,121 +1,177 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
   <meta charset="utf-8">
-  <title>İngilizce kelime ezberleme</title>
-  <meta name="description" content="mobile first, app, web app, responsive, admin dashboard, flat, flat ui">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> 
-  <link rel="stylesheet" href="css/bootstrap.css">
-  <link rel="stylesheet" href="css/font-awesome.min.css">
-  <link rel="stylesheet" href="css/font.css" cache="false">
-  <link rel="stylesheet" href="css/style.css">
-  <link href='https://fonts.googleapis.com/css?family=Exo+2&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  <title>İngilizce Kelime Ezberleme</title>
+  <meta name="description" content="İngilizce kelimeleri 3 seçenekli hızlı testlerle eğlenerek ezberle. Kolay ve zor kelime modları.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#58cc02">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/quiz.css?v=2.0">
 
   <link rel="apple-touch-icon" sizes="57x57" href="static/apple-icon-57x57.png">
-<link rel="apple-touch-icon" sizes="60x60" href="static/apple-icon-60x60.png">
-<link rel="apple-touch-icon" sizes="72x72" href="static/apple-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="76x76" href="static/apple-icon-76x76.png">
-<link rel="apple-touch-icon" sizes="114x114" href="static/apple-icon-114x114.png">
-<link rel="apple-touch-icon" sizes="120x120" href="static/apple-icon-120x120.png">
-<link rel="apple-touch-icon" sizes="144x144" href="static/apple-icon-144x144.png">
-<link rel="apple-touch-icon" sizes="152x152" href="static/apple-icon-152x152.png">
-<link rel="apple-touch-icon" sizes="180x180" href="static/apple-icon-180x180.png">
-<link rel="icon" type="image/png" sizes="192x192"  href="static/android-icon-192x192.png">
-<link rel="icon" type="image/png" sizes="32x32" href="static/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="96x96" href="static/favicon-96x96.png">
-<link rel="icon" type="image/png" sizes="16x16" href="static/favicon-16x16.png">
-<link rel="manifest" href="static/manifest.json">
-<meta name="msapplication-TileColor" content="#ffffff">
-<meta name="msapplication-TileImage" content="static/ms-icon-144x144.png">
-<meta name="theme-color" content="#ffffff">
-
-
-  <!--[if lt IE 9]>
-    <script src="js/ie/respond.min.js" cache="false"></script>
-    <script src="js/ie/html5.js" cache="false"></script>
-  <![endif]-->
+  <link rel="apple-touch-icon" sizes="60x60" href="static/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="static/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="static/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="static/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="static/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="static/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="static/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="static/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="static/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="static/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="static/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="static/favicon-16x16.png">
+  <link rel="manifest" href="static/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="static/ms-icon-144x144.png">
 
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-3XDFD1S0SH"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-3XDFD1S0SH');
-</script>
-
-
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3XDFD1S0SH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3XDFD1S0SH');
+  </script>
 </head>
 <body>
- 
-  
-   
-  <div class="container" style="max-width: 420px; margin: 0 auto; padding:0px;"> 
-  
-      <section  ng-app="MyTutorialApp" style="width:400px; height: 850px; background-image:url('images/eng.png');" ng-controller="MainController" class="panel">
-            <header style="font-family: 'Exo 2', sans-serif;" class="panel-heading text-center">
-             Hoşgeldin.
-            </header>
-            <!--Avatar -->
-            <div style="position: relative; left: 13px; width: 371px; height: 100px; top: 112px;" id="head">
-            <img style="position: relative;top:12px;left:14px;" src="images/avatar.png">
-            <h3 style="font-family: 'Exo 2', sans-serif;color: white;position:relative;left:110px;top:-84px;width:261px;height:28px;">Ziyaretçi</h3>
-            <h6 style="font-family: 'Exo 2',sans-serif; color: white; position: relative; left: 110px; top: -84px; width: 261px; height: 50px;">İstatisliklerinizi kayıt etmek ve diğer kullanıcılarla tanışmak için aşağıdaki facebook ile giriş yap butonunu kullanın.</h6>
-                  <span class="label label-info" style="font-family: 'Exo 2',sans-serif;position: relative; top: -181px; left: 72px; font-size:15px;">{{nmbr}}</span>
-            <span class="label label-info" style="font-family: 'Exo 2',sans-serif; position: relative; font-size: 15px; top: -121px; left: 27px;">{{playcounter}}</span>
-            </div>
-            <!--End of Avatar -->
-            <div id="formcontrol" style="position: relative; left: 13px; width: 371px; height: 400px;top:110px;" >
-            <div style="position: relative;width: 370px;">
-            <div class="progress">
-            <div class="progress-bar progress-bar-success" style="width: {{dogri}}%">
-            <span >{{dogri}} </span>
-            </div>
-            <div class="progress-bar progress-bar-danger" style="width: {{hatali}}%">
-            <span >{{hatali}} </span>
-            </div>
-            </div>
-            <h2 style="text-align: center;" ng-model="people">{{people[Aralik].code}}</h2>
-            </div>
-            <input class="form-control" name="google" ng-model="google"  style="position: relative; height: 44px; width: 305px; left: 35px; top: 0px;" type="text" />
-            <h3 style="text-align: center;" ><span class="label label-danger">{{result}}</span> </h3>
-            <h6 style="text-align: center;" >Cevabı görmek için <span class="label label-info">qqq</span>, ipucu  için <span class="label label-info">www</span> yazın . </h6>
-            <h5 style="text-align: center;margin: 5px;" >
-              <a href="zor-kelimeler.html"> <span class="label label-success">Zor kelimeler</span>  </a>  
-        
-              </h5>
-             
-        
-            </div>
-      </section>
-  </div>
- 
 
+  <!-- Maskot: sayfada birkaç yerde <use href="#maskot"> ile kullanılıyor -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="maskot" viewBox="0 0 120 120">
+      <path d="M20 14h80a14 14 0 0 1 14 14v52a14 14 0 0 1-14 14H56l-20 18v-18H20A14 14 0 0 1 6 80V28a14 14 0 0 1 14-14z" fill="#58cc02"/>
+      <path d="M20 14h80a14 14 0 0 1 14 14v6H6v-6a14 14 0 0 1 14-14z" fill="#89e219" opacity=".55"/>
+      <g class="maskot-gozler">
+        <ellipse cx="42" cy="50" rx="13" ry="15" fill="#fff"/>
+        <ellipse cx="78" cy="50" rx="13" ry="15" fill="#fff"/>
+        <circle cx="45" cy="53" r="6.5" fill="#3c3c3c"/>
+        <circle cx="81" cy="53" r="6.5" fill="#3c3c3c"/>
+        <circle cx="47" cy="50" r="2.2" fill="#fff"/>
+        <circle cx="83" cy="50" r="2.2" fill="#fff"/>
+      </g>
+      <path d="M48 72q12 11 24 0" fill="none" stroke="#3c3c3c" stroke-width="4.5" stroke-linecap="round"/>
+      <ellipse cx="30" cy="70" rx="6" ry="3.5" fill="#ff86d0" opacity=".45"/>
+      <ellipse cx="90" cy="70" rx="6" ry="3.5" fill="#ff86d0" opacity=".45"/>
+    </symbol>
+  </svg>
 
+  <main class="uygulama">
 
-  <!-- footer -->
-  <footer id="footer">
-    <div class="text-center padder clearfix">
-      <p>
-        <small style="font-family: 'Exo 2', sans-serif;"> İngilizce kelime egzersiz'i yaparak ingilizceyi en hızlı şekilde öğrenin.</small><br><br>
-        <a href="#" class="btn btn-xs btn-circle btn-twitter"><i class="icon-twitter"></i></a>
-        <a href="#" class="btn btn-xs btn-circle btn-facebook"><i class="icon-facebook"></i></a>
-        <a href="#" class="btn btn-xs btn-circle btn-gplus"><i class="icon-google-plus"></i></a>
-      </p>
+    <!-- ===== Başlangıç ===== -->
+    <section class="ekran ekran-baslangic aktif" id="ekran-baslangic" aria-labelledby="baslik">
+      <button class="ikon-btn ses-btn" id="ses-btn" type="button" aria-pressed="true" aria-label="Sesi kapat">
+        <svg class="ses-acik-ikon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <svg class="ses-kapali-ikon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M17 9l5 6M22 9l-5 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+
+      <svg class="maskot maskot-yuzen" viewBox="0 0 120 120" aria-hidden="true"><use href="#maskot"/></svg>
+      <h1 id="baslik">Kelime Ezberle</h1>
+      <p class="alt-baslik">Her gün birkaç dakika, 3 seçenek, sınırsız kelime.</p>
+
+      <div class="mod-secici" role="radiogroup" aria-label="Zorluk">
+        <button type="button" role="radio" class="mod" data-mod="kolay" aria-checked="true">
+          <span class="mod-ad">Kolay</span>
+          <span class="mod-sayi" id="sayi-kolay"></span>
+        </button>
+        <button type="button" role="radio" class="mod" data-mod="zor" aria-checked="false">
+          <span class="mod-ad">Zor</span>
+          <span class="mod-sayi" id="sayi-zor"></span>
+        </button>
+      </div>
+
+      <button class="btn btn-yesil btn-buyuk" id="basla-btn" type="button">Başla</button>
+      <p class="ipucu-klavye">İpucu: klavyede <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> ile seçebilirsin.</p>
+    </section>
+
+    <!-- ===== Soru ===== -->
+    <section class="ekran ekran-soru" id="ekran-soru" aria-label="Soru">
+      <header class="ust-cubuk">
+        <button class="ikon-btn" id="kapat-btn" type="button" aria-label="Dersten çık">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+        </button>
+        <div class="ilerleme" role="progressbar" aria-label="İlerleme" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="ilerleme">
+          <div class="ilerleme-dolgu" id="ilerleme-dolgu"></div>
+        </div>
+        <div class="seri" id="seri" title="Üst üste doğru">
+          <span class="seri-alev" aria-hidden="true">🔥</span><span id="seri-sayi">0</span>
+        </div>
+      </header>
+
+      <div class="soru-icerik" id="soru-icerik">
+        <p class="yonerge">Bu kelimenin Türkçesi ne?</p>
+        <div class="kelime-kart">
+          <button class="ikon-btn hoparlor" id="hoparlor-btn" type="button" aria-label="Telaffuzu dinle">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+          </button>
+          <h2 class="kelime" id="kelime" lang="en"></h2>
+        </div>
+        <div class="secenekler" id="secenekler"></div>
+      </div>
+
+    </section>
+
+    <!-- ===== Sonuç ===== -->
+    <section class="ekran ekran-sonuc" id="ekran-sonuc" aria-labelledby="sonuc-baslik">
+      <svg class="maskot maskot-zipla" viewBox="0 0 120 120" aria-hidden="true"><use href="#maskot"/></svg>
+      <h1 id="sonuc-baslik"></h1>
+      <p class="alt-baslik" id="sonuc-alt"></p>
+
+      <div class="istatistikler">
+        <div class="istat istat-yesil"><span class="istat-ad">Doğru</span><span class="istat-deger" id="istat-dogru">0</span></div>
+        <div class="istat istat-turuncu"><span class="istat-ad">Başarı</span><span class="istat-deger" id="istat-basari">0%</span></div>
+        <div class="istat istat-mavi"><span class="istat-ad">Süre</span><span class="istat-deger" id="istat-sure">0:00</span></div>
+      </div>
+
+      <div class="tekrar-kutu" id="tekrar-kutu">
+        <h3>Tekrar etmen gerekenler</h3>
+        <ul class="tekrar-liste" id="tekrar-liste"></ul>
+      </div>
+
+      <div class="sonuc-butonlar">
+        <button class="btn btn-yesil btn-buyuk" id="yeni-ders-btn" type="button">Yeni ders</button>
+        <button class="btn btn-mavi-cizgi btn-buyuk" id="yanlislar-btn" type="button">Yanlışları tekrarla</button>
+        <button class="btn-metin" id="ana-sayfa-btn" type="button">Ana sayfa</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Sabit konumlu parçalar: animasyonlu ekranların dışında olmalı, yoksa ekran genişliğine yayılamıyorlar -->
+  <div class="seri-rozet" id="seri-rozet" aria-live="polite"></div>
+
+  <div class="geri-bildirim" id="geri-bildirim" role="status" aria-live="assertive">
+    <div class="gb-ic">
+      <div class="gb-mesaj">
+        <span class="gb-ikon" aria-hidden="true">
+          <svg class="gb-tik" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg class="gb-carpi" viewBox="0 0 24 24"><path d="M7 7l10 10M17 7L7 17" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/></svg>
+        </span>
+        <div>
+          <p class="gb-baslik" id="gb-baslik"></p>
+          <p class="gb-detay" id="gb-detay"></p>
+        </div>
+      </div>
+      <button class="btn" id="devam-btn" type="button">Devam</button>
     </div>
-  </footer>
-  <!-- / footer -->
+  </div>
 
+  <!-- Çıkış onayı -->
+  <div class="modal-arka" id="cikis-modal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-baslik">
+      <svg class="maskot maskot-kucuk" viewBox="0 0 120 120" aria-hidden="true"><use href="#maskot"/></svg>
+      <h3 id="modal-baslik">Gitme, az kaldı!</h3>
+      <p>Çıkarsan bu dersteki ilerlemen kaybolur.</p>
+      <button class="btn btn-yesil btn-buyuk" id="modal-kal-btn" type="button">Derse devam et</button>
+      <button class="btn-metin btn-metin-kirmizi" id="modal-cik-btn" type="button">Çık</button>
+    </div>
+  </div>
 
-	<script src="js/jquery.min.js"></script>
-  <!-- Bootstrap -->
-  <script src="js/bootstrap.js"></script>
-  <!-- app -->
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js" type="text/javascript"></script>
-  <script src="js/main.js?v=1.0" type="text/javascript"></script>
-  <script src="js/app.js"></script>
-  <script src="js/app.plugin.js"></script>
-  <script src="js/app.data.js"></script>
+  <canvas class="konfeti" id="konfeti" aria-hidden="true"></canvas>
+
+  <script src="js/kelimeler.js?v=2.0"></script>
+  <script src="js/quiz.js?v=2.0"></script>
 </body>
 </html>
