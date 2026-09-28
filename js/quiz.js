@@ -6,6 +6,9 @@
   var OTOMATIK_GECIS_MS = 1200;  // doğru cevaptan sonra sonraki soruya geçme süresi
   var SERI_ROZET_ARALIGI = 5;    // her 5 doğruda bir "üst üste" rozeti
 
+  // Sürüm, index.html'deki quiz.js?v=... değerinden okunur; sürüm yalnızca orada güncellenir.
+  var SURUM = document.currentScript && new URL(document.currentScript.src).searchParams.get('v');
+
   var OVGULER = ['Harika!', 'Süper!', 'Mükemmel!', 'Aynen öyle!', 'Çok iyi!', 'Tam isabet!'];
 
   var $ = function (id) { return document.getElementById(id); };
@@ -408,6 +411,9 @@
 
   // ---------- Olaylar ----------
 
+  if (SURUM) {
+    document.querySelectorAll('[data-surum]').forEach(function (el) { el.textContent = 'v' + SURUM; });
+  }
   $('sayi-kolay').textContent = KELIMELER.kolay.length + ' kelime';
   $('sayi-zor').textContent = KELIMELER.zor.length + ' kelime';
   moduSec(mod);

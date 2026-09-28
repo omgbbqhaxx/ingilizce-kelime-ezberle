@@ -242,6 +242,15 @@ kbd {
 }
 @media (hover: none) { .ipucu-klavye { display: none; } }
 
+/* Sürüm etiketi: yayındaki sürümü takip etmek için */
+.surum {
+  color: var(--cizgi-koyu);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .5px;
+}
+.ekran-baslangic .surum { position: absolute; bottom: 12px; left: 0; right: 0; }
+
 /* ================= Soru ================= */
 .ust-cubuk {
   display: flex;
