@@ -230,6 +230,9 @@
     if (btn.classList.contains('yukleniyor')) return;
     btn.classList.add('yukleniyor');
     btn.textContent = 'Büyü kitabı açılıyor…';
+    // iOS Safari konuşmaya ancak bir dokunuşun içinde izin verir; ilk kelime sözlük yüklendikten
+    // sonra okunacağı için sesi burada, tıklamanın içinde boş bir cümleyle açıyoruz
+    if (konusmaVar && sesAcik) speechSynthesis.speak(new SpeechSynthesisUtterance(''));
     $('yukleme-hata').hidden = true;
     sozlukYukle(seviye)
       .then(function () { seviyeKartlariniGuncelle(); yeniGorev(); })
@@ -290,6 +293,7 @@
     ilerlemeyiGuncelle();
 
     $('kelime').textContent = kelime[0];
+    if (sesAcik) telaffuzEt(); // yeni kelime bir kez sesli okunur; hoparlörle tekrar dinlenebilir
 
     var kutu = $('secenekler');
     kutu.textContent = '';
