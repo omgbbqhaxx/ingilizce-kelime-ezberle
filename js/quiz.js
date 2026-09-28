@@ -112,6 +112,26 @@
       b.querySelector('.seviye-bar i').style.width = ((toplam - kalan) / toplam * 100) + '%';
       b.classList.toggle('tamam', kalan === 0);
     });
+    genelIlerlemeyiGuncelle();
+  }
+
+  // Tüm seviyelerin toplamı: ana sayfanın altındaki yeşil XP kutusu
+  function genelIlerlemeyiGuncelle() {
+    var toplam = 0, ogrenilen = 0;
+    for (var s = 1; s <= SEVIYE_SAYISI; s++) {
+      var t = toplamSayi(s);
+      if (!t) return; // seviye sayıları henüz yüklenmedi
+      toplam += t;
+      ogrenilen += t - kalanSayi(s);
+    }
+    var yuzde = ogrenilen / toplam * 100;
+    $('genel-ogrenilen').textContent = sayiYaz(ogrenilen) + ' / ' + sayiYaz(toplam);
+    $('genel-kalan').textContent = sayiYaz(toplam - ogrenilen);
+    // 40.000 kelimede yüzde yavaş ilerler; %10'a kadar tek ondalıkla göster (%1,3 gibi)
+    $('genel-yuzde').textContent = '%' + (Math.floor(yuzde * (yuzde < 10 ? 10 : 1)) / (yuzde < 10 ? 10 : 1)).toLocaleString('tr');
+    $('genel-dolgu').style.width = yuzde + '%';
+    $('genel-bar').setAttribute('aria-valuenow', Math.floor(yuzde));
+    $('genel-xp').hidden = false;
   }
 
   // Her dersin kelimeleri ortak bir desteden çekilir; böylece liste bitmeden aynı kelime tekrar gelmez.

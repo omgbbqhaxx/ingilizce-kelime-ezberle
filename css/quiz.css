@@ -384,6 +384,74 @@ h1, h2, h3, p { margin: 0; }
 }
 .seviye.tamam .seviye-sayi { color: var(--renk); font-weight: 700; }
 
+/* Genel ilerleme: yeşil XP kutusu */
+.genel-xp {
+  width: 100%;
+  max-width: 400px;
+  margin-top: 6px;
+  padding: 12px 14px;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  background:
+    linear-gradient(180deg, #162a17, #0c170d) padding-box,
+    var(--altin-cerceve) border-box;
+  box-shadow: 0 4px 0 #07060c, 0 0 18px rgba(30, 255, 0, .12);
+  text-align: left;
+}
+.genel-xp-ust {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+.genel-xp-ust span:first-child {
+  font-family: var(--baslik-font);
+  font-weight: 700;
+  color: var(--altin);
+  font-size: 15px;
+}
+.genel-xp-ust span:last-child { color: #b8ffa8; font-weight: 800; font-size: 14px; font-variant-numeric: tabular-nums; }
+.genel-xp-bar {
+  position: relative;
+  height: 20px;
+  border: 1px solid #3d6b2e;
+  border-radius: 4px;
+  background: #050a05;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, .8);
+  overflow: hidden;
+}
+.genel-xp-bar::after {
+  /* 10 bölmeli çentikler */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(90deg, transparent 0 calc(10% - 1px), rgba(0, 0, 0, .5) calc(10% - 1px) 10%);
+  pointer-events: none;
+}
+.genel-xp-bar i {
+  display: block;
+  height: 100%;
+  width: 0;
+  min-width: 2px;
+  background: linear-gradient(180deg, #8dff72 0%, #1eb800 50%, #0b5a00 100%);
+  box-shadow: 0 0 10px rgba(30, 255, 0, .7);
+  transition: width .8s var(--yay);
+}
+.genel-xp-bar span {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  z-index: 1;
+  color: #fff;
+  font-family: var(--baslik-font);
+  font-size: 12px;
+  font-weight: 700;
+  text-shadow: 0 1px 2px #000, 0 0 4px #000;
+}
+.genel-xp-alt { margin-top: 6px; color: var(--soluk-yazi); font-size: 14px; text-align: center; }
+.genel-xp-alt b { color: #b8ffa8; font-weight: 800; font-variant-numeric: tabular-nums; }
+
 .seviye-bitti { color: var(--yesil); font-size: 16px; max-width: 400px; line-height: 1.4; }
 .seviye-bitti .btn-metin { padding: 4px 6px; font-size: 14px; }
 
