@@ -29,6 +29,8 @@
   var sesAcik = depo.al('ses') !== 'kapali';
   var sozlukler = {};  // seviye -> [[ingilizce, [türkçe, ...]], ...]
   var desteler = {};   // seviye -> henüz sorulmamış kelimeler (karışık)
+  var toplamlar = null;    // seviye başına kelime sayısı (data/seviyeler.json)
+  var ogrenilenler = {};   // seviye -> Set(doğru bilinen İngilizce kelimeler)
   var ders = null;
   var aktifEkran = 'baslangic';
   var gecisZamanlayici = null;
@@ -67,16 +69,63 @@
       .then(function (liste) { return (sozlukler[s] = liste); });
   }
 
+  // ---------- Öğrenilen kelimeler ----------
+  // Doğru bilinen kelime "öğrenildi" sayılır ve o seviyede bir daha sorulmaz; yanlışlar sorulmaya devam eder.
+  // Bu cihazdaki tarayıcıda saklanır (hesap sistemi yok).
+
+  function ogrenilenSeti(s) {
+    if (!ogrenilenler[s]) {
+      var liste;
+      try { liste = JSON.parse(depo.al('ogrenilen-' + s) || '[]'); } catch (e) { liste = []; }
+      ogrenilenler[s] = new Set(Array.isArray(liste) ? liste : []);
+    }
+    return ogrenilenler[s];
+  }
+
+  function ogrenildiIsaretle(s, en) {
+    var set = ogrenilenSeti(s);
+    set.add(en);
+    depo.yaz('ogrenilen-' + s, JSON.stringify(Array.from(set)));
+  }
+
+  function toplamSayi(s) {
+    return sozlukler[s] ? sozlukler[s].length : toplamlar ? toplamlar[s - 1] : 0;
+  }
+
+  function kalanSayi(s) {
+    return Math.max(0, toplamSayi(s) - ogrenilenSeti(s).size);
+  }
+
+  function seviyeAdi(s) {
+    return document.querySelector('.seviye[data-seviye="' + s + '"] .seviye-ad').textContent;
+  }
+
+  function sayiYaz(n) { return n.toLocaleString('tr'); }
+
+  function seviyeKartlariniGuncelle() {
+    document.querySelectorAll('.seviye').forEach(function (b) {
+      var s = Number(b.dataset.seviye);
+      var toplam = toplamSayi(s);
+      if (!toplam) return;
+      var kalan = kalanSayi(s);
+      b.querySelector('.seviye-sayi').textContent = kalan === 0 ? 'Tamamlandı ✓' : sayiYaz(kalan) + ' kaldı';
+      b.querySelector('.seviye-bar i').style.width = ((toplam - kalan) / toplam * 100) + '%';
+      b.classList.toggle('tamam', kalan === 0);
+    });
+  }
+
   // Her dersin kelimeleri ortak bir desteden çekilir; böylece liste bitmeden aynı kelime tekrar gelmez.
+  // Öğrenilmiş kelimeler desteye hiç girmez.
   function destedenAl(n) {
-    var liste = sozlukler[seviye];
-    var deste = desteler[seviye] || [];
+    var ogrenilen = ogrenilenSeti(seviye);
+    var yeni = function (k) { return !ogrenilen.has(k[0]); };
+    var deste = (desteler[seviye] || []).filter(yeni);
     if (deste.length < n) {
       var kalan = new Set(deste);
-      deste = deste.concat(karistir(liste).filter(function (k) { return !kalan.has(k); }));
+      deste = deste.concat(karistir(sozlukler[seviye]).filter(function (k) { return yeni(k) && !kalan.has(k); }));
     }
     desteler[seviye] = deste;
-    return deste.splice(0, Math.min(n, liste.length));
+    return deste.splice(0, n);
   }
 
   // Doğru cevap + iki yanlış seçenek. Yanlış seçenek, kelimenin anlamlarından biri olamaz;
@@ -170,6 +219,7 @@
       b.setAttribute('aria-checked', String(Number(b.dataset.seviye) === seviye));
     });
     $('yukleme-hata').hidden = true;
+    $('seviye-bitti').hidden = true;
     try { history.replaceState(null, '', '?seviye=' + seviye); } catch (e) {}
   }
 
@@ -182,7 +232,7 @@
     btn.textContent = 'Büyü kitabı açılıyor…';
     $('yukleme-hata').hidden = true;
     sozlukYukle(seviye)
-      .then(function () { dersBaslat(); })
+      .then(function () { seviyeKartlariniGuncelle(); yeniGorev(); })
       .catch(function () {
         $('yukleme-hata').hidden = false;
         ekranGoster('baslangic');
@@ -193,9 +243,27 @@
       });
   }
 
+  // Sorulmamış kelime kalmadıysa seviye bitmiştir: başlangıç ekranında haber ver
+  function yeniGorev() {
+    var kelimeler = destedenAl(SORU_SAYISI);
+    if (!kelimeler.length) {
+      ekranGoster('baslangic');
+      seviyeKartlariniGuncelle();
+      $('seviye-bitti').hidden = false;
+      return;
+    }
+    dersBaslat(kelimeler);
+  }
+
+  function kalanBilgisiniGuncelle(zipla) {
+    $('kalan-sayi').textContent = sayiYaz(kalanSayi(seviye));
+    if (zipla) animasyonuYenidenBaslat($('kalan-sayi'), 'zipla');
+  }
+
   function dersBaslat(kelimeler) {
     ders = {
-      sorular: kelimeler || destedenAl(SORU_SAYISI),
+      sorular: kelimeler,
+      kalanBaslangic: kalanSayi(seviye),
       sira: 0,
       dogru: 0,
       yanlislar: [],
@@ -204,6 +272,8 @@
       baslangic: Date.now()
     };
     seriyiGuncelle(false);
+    $('kalan-seviye').textContent = seviyeAdi(seviye);
+    kalanBilgisiniGuncelle(false);
     ekranGoster('soru');
     soruyuGoster();
   }
@@ -264,6 +334,8 @@
     if (dogruMu) {
       ders.dogru++;
       ders.seri++;
+      ogrenildiIsaretle(seviye, kelime[0]);
+      kalanBilgisiniGuncelle(true);
       xpYazisiGoster(secilenBtn);
       seriyiGuncelle(true);
       if (ders.seri % SERI_ROZET_ARALIGI === 0) {
@@ -374,6 +446,21 @@
     animasyonuYenidenBaslat(document.querySelector('.ekran-sonuc .maskot'), 'maskot-zipla');
 
     say($('sonuc-xp'), ders.dogru * XP_PUANI, function (n) { return '+' + n + ' XP'; });
+
+    // Seviye geri sayımı: dersten önceki kalan sayıdan şimdikine doğru azalır
+    var toplamKelime = toplamSayi(seviye);
+    var kalanSimdi = kalanSayi(seviye);
+    $('durum-seviye').textContent = seviyeAdi(seviye);
+    var dolgu = $('durum-dolgu');
+    dolgu.style.transition = 'none';
+    dolgu.style.width = ((toplamKelime - ders.kalanBaslangic) / toplamKelime * 100) + '%';
+    void dolgu.offsetWidth;
+    dolgu.style.transition = '';
+    dolgu.style.width = ((toplamKelime - kalanSimdi) / toplamKelime * 100) + '%';
+    say($('durum-kalan'), kalanSimdi, function (n) {
+      return n === 0 ? 'Seviye tamamlandı! 🏆' : sayiYaz(n) + ' kelime kaldı';
+    }, ders.kalanBaslangic);
+    seviyeKartlariniGuncelle();
     say($('istat-dogru'), ders.dogru, function (n) { return n + '/' + toplam; });
     say($('istat-basari'), basari, function (n) { return n + '%'; });
     say($('istat-sure'), saniye, function (n) {
@@ -384,18 +471,19 @@
     if (basari >= 50) konfetiPatlat();
 
     if (typeof gtag === 'function') {
-      gtag('event', 'ders_bitti', { seviye: seviye, basari: basari });
+      gtag('event', 'ders_bitti', { seviye: seviye, basari: basari, kalan: kalanSimdi });
     }
   }
 
-  // Sayıyı 0'dan hedefe doğru sayarak gösterir.
-  function say(el, hedef, bicim) {
+  // Sayıyı başlangıçtan (varsayılan 0) hedefe doğru sayarak gösterir; geri sayım da olabilir.
+  function say(el, hedef, bicim, baslangic) {
+    baslangic = baslangic || 0;
     if (hareketAzalt) { el.textContent = bicim(hedef); return; }
     var sure = 900, bas = performance.now();
     (function adim(simdi) {
       var t = Math.min(1, (simdi - bas) / sure);
       var yumusak = 1 - Math.pow(1 - t, 3);
-      el.textContent = bicim(Math.round(hedef * yumusak));
+      el.textContent = bicim(Math.round(baslangic + (hedef - baslangic) * yumusak));
       if (t < 1) requestAnimationFrame(adim);
     })(bas);
   }
@@ -467,6 +555,7 @@
     $('geri-bildirim').classList.remove('acik');
     if (konusmaVar) speechSynthesis.cancel();
     ders = null;
+    seviyeKartlariniGuncelle(); // yarıda bırakılan derste öğrenilenler de sayılır
     ekranGoster('baslangic');
   }
 
@@ -479,9 +568,8 @@
   fetch('data/seviyeler.json?v=' + (SURUM || ''))
     .then(function (r) { return r.json(); })
     .then(function (sayilar) {
-      document.querySelectorAll('.seviye-sayi').forEach(function (el, i) {
-        el.textContent = sayilar[i].toLocaleString('tr') + ' kelime';
-      });
+      toplamlar = sayilar;
+      seviyeKartlariniGuncelle();
     })
     .catch(function () {});
   sesButonunuGuncelle();
@@ -508,12 +596,23 @@
   $('cikis-modal').addEventListener('click', function (e) {
     if (e.target === this) modalKapat();
   });
-  $('yeni-ders-btn').addEventListener('click', function () { dersBaslat(); });
+  $('yeni-ders-btn').addEventListener('click', yeniGorev);
+  $('sifirla-btn').addEventListener('click', function () {
+    if (!confirm(seviyeAdi(seviye) + ' seviyesindeki ilerlemen silinecek. Emin misin?')) return;
+    ogrenilenler[seviye] = new Set();
+    depo.yaz('ogrenilen-' + seviye, '[]');
+    desteler[seviye] = null;
+    $('seviye-bitti').hidden = true;
+    seviyeKartlariniGuncelle();
+  });
   sozlukYukle(seviye).catch(function () {});
   $('yanlislar-btn').addEventListener('click', function () {
     dersBaslat(karistir(ders.yanlislar));
   });
-  $('ana-sayfa-btn').addEventListener('click', function () { ekranGoster('baslangic'); });
+  $('ana-sayfa-btn').addEventListener('click', function () {
+    seviyeKartlariniGuncelle();
+    ekranGoster('baslangic');
+  });
 
   document.addEventListener('keydown', function (e) {
     if (e.repeat || e.ctrlKey || e.metaKey || e.altKey) return;
