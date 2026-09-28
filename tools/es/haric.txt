@@ -1,0 +1,26 @@
+# Teste girmeyecek İspanyolca kelimeler (her satıra bir tane): fiil çekimleri, özel isimler, deyim parçaları
+van
+pasa
+dio
+habla
+dado
+mira
+llamado
+cabo
+baja
+dije
+maría
+busca
+acciones
+toma
+ido
+amo
+dicha
+dejado
+tantas
+clara
+viva
+cuesta
+tenia
+haber
+tenía

@@ -27,13 +27,21 @@
     yaz: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
   };
 
+  // Öğrenilen dil: kök sayfa İngilizce; /es/ sayfası window.DIL ile İspanyolca ayarları verir
+  var DIL = Object.assign({
+    kod: 'en',      // kelimenin dili (lang özniteliği)
+    ses: 'en-US',   // sesli okuma dili
+    veri: 'data/',  // seviye dosyalarının klasörü
+    onek: ''        // tarayıcıda saklanan ilerleme anahtarlarının öneki; diller birbirini ezmesin
+  }, window.DIL || {});
+
   var hareketAzalt = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var SEVIYE_SAYISI = 5;
   var parametreler = new URLSearchParams(location.search);
   // ?mod=zor eski zor-kelimeler sayfasından gelen bağlantılar için
   var seviye = seviyeGecerli(parametreler.get('seviye')) ||
-    (parametreler.get('mod') === 'zor' ? 5 : seviyeGecerli(depo.al('seviye')) || 1);
+    (parametreler.get('mod') === 'zor' ? 5 : seviyeGecerli(depo.al(DIL.onek + 'seviye')) || 1);
   var sesAcik = depo.al('ses') !== 'kapali';
   var sozlukler = {};  // seviye -> [[ingilizce, [türkçe, ...]], ...]
   var desteler = {};   // seviye -> henüz sorulmamış kelimeler (karışık)
@@ -69,7 +77,7 @@
   // Seviye dosyası yalnızca o seviye seçilince indirilir (5. seviye ~700 KB).
   function sozlukYukle(s) {
     if (sozlukler[s]) return Promise.resolve(sozlukler[s]);
-    return fetch('data/seviye-' + s + '.json?v=' + (SURUM || ''))
+    return fetch(DIL.veri + 'seviye-' + s + '.json?v=' + (SURUM || ''))
       .then(function (r) {
         if (!r.ok) throw new Error(r.status);
         return r.json();
@@ -84,7 +92,7 @@
   function ogrenilenSeti(s) {
     if (!ogrenilenler[s]) {
       var liste;
-      try { liste = JSON.parse(depo.al('ogrenilen-' + s) || '[]'); } catch (e) { liste = []; }
+      try { liste = JSON.parse(depo.al(DIL.onek + 'ogrenilen-' + s) || '[]'); } catch (e) { liste = []; }
       ogrenilenler[s] = new Set(Array.isArray(liste) ? liste : []);
     }
     return ogrenilenler[s];
@@ -93,7 +101,7 @@
   function ogrenildiIsaretle(s, en) {
     var set = ogrenilenSeti(s);
     set.add(en);
-    depo.yaz('ogrenilen-' + s, JSON.stringify(Array.from(set)));
+    depo.yaz(DIL.onek + 'ogrenilen-' + s, JSON.stringify(Array.from(set)));
   }
 
   function toplamSayi(s) {
@@ -222,7 +230,7 @@
     if (!konusmaVar || !ders) return;
     var btn = $('hoparlor-btn');
     var soz = new SpeechSynthesisUtterance(ders.kelime[0]);
-    soz.lang = 'en-US';
+    soz.lang = DIL.ses;
     soz.rate = 0.9;
     soz.onend = soz.onerror = function () { btn.classList.remove('caliyor'); };
     speechSynthesis.cancel();
@@ -242,13 +250,13 @@
 
   function seviyeSec(yeni) {
     seviye = yeni;
-    depo.yaz('seviye', String(seviye));
+    depo.yaz(DIL.onek + 'seviye', String(seviye));
     document.querySelectorAll('.seviye').forEach(function (b) {
       b.setAttribute('aria-checked', String(Number(b.dataset.seviye) === seviye));
     });
     $('yukleme-hata').hidden = true;
     $('seviye-bitti').hidden = true;
-    try { history.replaceState(null, '', '?seviye=' + seviye); } catch (e) {}
+    try { history.replaceState(null, '', location.pathname + '?seviye=' + seviye); } catch (e) {}
   }
 
   // ---------- Ders akışı ----------
@@ -476,7 +484,7 @@
     ders.yanlislar.forEach(function (k) {
       var li = document.createElement('li');
       var en = document.createElement('b');
-      en.lang = 'en';
+      en.lang = DIL.kod;
       en.textContent = k[0];
       var tr = document.createElement('span');
       tr.textContent = anlamlar(k);
@@ -523,7 +531,7 @@
     if (basari >= 50) konfetiPatlat();
 
     if (typeof gtag === 'function') {
-      gtag('event', 'ders_bitti', { seviye: seviye, basari: basari, kalan: kalanSimdi });
+      gtag('event', 'ders_bitti', { dil: DIL.kod, seviye: seviye, basari: basari, kalan: kalanSimdi });
     }
 
     // Bu derste seviyenin son kelimesi öğrenildiyse: sonraki seviyeyi seç ve kutlama göster
@@ -538,7 +546,7 @@
       setTimeout(function () {
         if (aktifEkran === 'sonuc') seviyeAtlaGoster(bitenSeviye);
       }, 1300);
-      if (typeof gtag === 'function') gtag('event', 'seviye_bitti', { seviye: bitenSeviye });
+      if (typeof gtag === 'function') gtag('event', 'seviye_bitti', { dil: DIL.kod, seviye: bitenSeviye });
     }
   }
 
@@ -655,7 +663,8 @@
     document.querySelectorAll('[data-surum]').forEach(function (el) { el.textContent = 'v' + SURUM; });
   }
   seviyeSec(seviye);
-  fetch('data/seviyeler.json?v=' + (SURUM || ''))
+  $('kelime').lang = DIL.kod;
+  fetch(DIL.veri + 'seviyeler.json?v=' + (SURUM || ''))
     .then(function (r) { return r.json(); })
     .then(function (sayilar) {
       toplamlar = sayilar;
@@ -700,7 +709,7 @@
   $('sifirla-btn').addEventListener('click', function () {
     if (!confirm(seviyeAdi(seviye) + ' seviyesindeki ilerlemen silinecek. Emin misin?')) return;
     ogrenilenler[seviye] = new Set();
-    depo.yaz('ogrenilen-' + seviye, '[]');
+    depo.yaz(DIL.onek + 'ogrenilen-' + seviye, '[]');
     desteler[seviye] = null;
     $('seviye-bitti').hidden = true;
     seviyeKartlariniGuncelle();

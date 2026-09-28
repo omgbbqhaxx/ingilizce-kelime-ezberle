@@ -2,8 +2,10 @@
 <html lang="tr">
 <head>
   <meta charset="utf-8">
-  <title>İngilizce Kelime Ezberleme</title>
-  <meta name="description" content="40.000 İngilizce kelimeyi 5 seviyede, 3 seçenekli hızlı görevlerle oyun oynar gibi ezberle.">
+  <!-- Bu dosya tools/sayfa_uret.py ile index.html'den üretilir; elle düzenlemeyin. -->
+  <base href="../">
+  <title>İspanyolca Kelime Ezberleme</title>
+  <meta name="description" content="18.000 İspanyolca kelimeyi 5 seviyede, 3 seçenekli hızlı görevlerle oyun oynar gibi ezberle.">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#120e1f">
 
@@ -52,8 +54,8 @@
     <section class="ekran ekran-baslangic aktif" id="ekran-baslangic" aria-labelledby="baslik">
       <div class="giris-ust">
         <nav class="dil-secici" aria-label="Öğrenilecek dil">
-          <a href="./" aria-current="page">İngilizce</a>
-          <a href="es/">İspanyolca</a>
+          <a href="./">İngilizce</a>
+          <a href="es/" aria-current="page">İspanyolca</a>
         </nav>
         <button class="ikon-btn ses-btn" id="ses-btn" type="button" aria-pressed="true" aria-label="Sesi kapat">
           <svg class="ses-acik-ikon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
@@ -72,7 +74,7 @@
           <img class="maskot maskot-yuzen" src="images/maskot.webp?v=5.0" alt="" width="512" height="512">
         </div>
         <h1 id="baslik">Kelime Ezberle</h1>
-        <p class="alt-baslik">Seviyeni seç, 40.000 kelimelik büyü kitabını öğren.</p>
+        <p class="alt-baslik">Seviyeni seç, 18.000 kelimelik İspanyolca büyü kitabını öğren.</p>
       </header>
 
       <div class="pencere">
@@ -261,6 +263,7 @@
 
   <canvas class="konfeti" id="konfeti" aria-hidden="true"></canvas>
 
+  <script>window.DIL = {"kod": "es", "ses": "es-ES", "veri": "data/es/", "onek": "es-"};</script>
   <script src="js/quiz.js?v=5.0"></script>
 </body>
 </html>

@@ -292,7 +292,33 @@ h1, h2, h3, p { margin: 0; }
   gap: 10px;
   padding: 20px 0 28px;
 }
-.ses-btn { position: absolute; top: 12px; right: 0; }
+/* Üst şerit: dil sekmeleri + ses butonu */
+.giris-ust {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 4px;
+}
+.dil-secici { display: flex; gap: 6px; }
+.dil-secici a {
+  padding: 5px 12px 6px;
+  border: 1px solid #000;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #221c15, #120e0a);
+  box-shadow: 0 0 0 1px #5d4d2c;
+  color: var(--soluk-yazi);
+  font-size: 15px;
+  font-weight: 800;
+  text-decoration: none;
+  text-shadow: 1px 1px 0 #000;
+}
+.dil-secici a:hover { color: var(--altin-acik); }
+.dil-secici a[aria-current="page"] {
+  background: linear-gradient(180deg, #6a1f15 0%, #45120b 50%, #2e0b07 100%);
+  box-shadow: 0 0 0 1px #9c7a34, inset 0 1px 0 rgba(255, 190, 150, .25);
+  color: var(--altin-yazi);
+}
 .ses-btn .ses-kapali-ikon { display: none; }
 .ses-btn[aria-pressed="false"] .ses-acik-ikon { display: none; }
 .ses-btn[aria-pressed="false"] .ses-kapali-ikon { display: block; }
