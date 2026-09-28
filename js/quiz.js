@@ -11,6 +11,14 @@
 
   var XP_PUANI = 10;             // doğru cevap başına
 
+  // Seviye atlayınca gösterilen unvan ve buton yazısı; Türkçe ekler isme göre değiştiği için elle yazıldı
+  var SEVIYE_TEBRIK = {
+    2: ["Artık bir Kalfa'sın!", "Kalfa'ya başla"],
+    3: ["Artık bir Usta'sın!", "Usta'ya başla"],
+    4: ["Artık bir Başbüyücü'sün!", "Başbüyücü'ye başla"],
+    5: ["Efsanevi kelimelerin kapısı açıldı!", "Efsanevi'ye başla"]
+  };
+
   var $ = function (id) { return document.getElementById(id); };
 
   // localStorage gizli sekmede hata verebilir; tercihler yalnızca kolaylık için saklanıyor.
@@ -183,7 +191,8 @@
         dogru: [[659, 0], [988, .09]],
         yanlis: [[196, 0], [165, .13]],
         seri: [[784, 0], [988, .08], [1319, .16]],
-        bitti: [[523, 0], [659, .13], [784, .26], [1047, .39]]
+        bitti: [[523, 0], [659, .13], [784, .26], [1047, .39]],
+        seviye: [[523, 0], [659, .1], [784, .2], [1047, .32], [784, .46], [1047, .56], [1319, .7], [1568, .86]]
       }[tur];
       notalar.forEach(function (n) {
         var osilator = sesBaglami.createOscillator();
@@ -262,6 +271,16 @@
       .then(function () {
         btn.classList.remove('yukleniyor');
         btn.textContent = 'Maceraya başla';
+      });
+  }
+
+  // Seçili seviyenin sözlüğü yüklü değilse önce yükleyip görevi başlatır
+  function seviyeyeBasla() {
+    sozlukYukle(seviye)
+      .then(function () { seviyeKartlariniGuncelle(); yeniGorev(); })
+      .catch(function () {
+        ekranGoster('baslangic');
+        $('yukleme-hata').hidden = false;
       });
   }
 
@@ -506,6 +525,44 @@
     if (typeof gtag === 'function') {
       gtag('event', 'ders_bitti', { seviye: seviye, basari: basari, kalan: kalanSimdi });
     }
+
+    // Bu derste seviyenin son kelimesi öğrenildiyse: sonraki seviyeyi seç ve kutlama göster
+    var bitenSeviye = seviye;
+    $('yeni-ders-btn').textContent = 'Yeni görev';
+    if (kalanSimdi === 0 && ders.kalanBaslangic > 0) {
+      if (bitenSeviye < SEVIYE_SAYISI) {
+        seviyeSec(bitenSeviye + 1);
+        $('yeni-ders-btn').textContent = SEVIYE_TEBRIK[seviye][1];
+        sozlukYukle(seviye).catch(function () {}); // butona basılmadan indirmeye başla
+      }
+      setTimeout(function () {
+        if (aktifEkran === 'sonuc') seviyeAtlaGoster(bitenSeviye);
+      }, 1300);
+      if (typeof gtag === 'function') gtag('event', 'seviye_bitti', { seviye: bitenSeviye });
+    }
+  }
+
+  function seviyeAtlaGoster(biten) {
+    var son = biten === SEVIYE_SAYISI;
+    var hedef = son ? biten : biten + 1;
+    var kutu = $('seviye-atla');
+    kutu.style.setProperty('--renk', 'var(--nadir-' + hedef + ')');
+    $('sa-etiket').textContent = son ? 'Son seviye tamamlandı' : 'Seviye atladın';
+    $('sa-no').textContent = son ? '🏆' : hedef;
+    $('sa-ad').textContent = son ? 'Efsane' : seviyeAdi(hedef);
+    $('sa-baslik').textContent = son ? 'Efsane oldun!' : SEVIYE_TEBRIK[hedef][0];
+    $('sa-alt').textContent = seviyeAdi(biten) + ' seviyesindeki ' + sayiYaz(toplamSayi(biten)) +
+      ' kelimenin hepsini öğrendin.' + (son ? ' En zor seviyeyi bitirdin!' : '');
+    $('sa-devam-btn').textContent = son ? 'Ana sayfa' : SEVIYE_TEBRIK[hedef][1];
+    kutu.hidden = false;
+    animasyonuYenidenBaslat(kutu, 'goster');
+    $('sa-devam-btn').focus({ preventScroll: true });
+    sesCal('seviye');
+    konfetiPatlat(280);
+  }
+
+  function seviyeAtlaKapat() {
+    $('seviye-atla').hidden = true;
   }
 
   // Sayıyı başlangıçtan (varsayılan 0) hedefe doğru sayarak gösterir; geri sayım da olabilir.
@@ -523,7 +580,7 @@
 
   // ---------- Konfeti ----------
 
-  function konfetiPatlat() {
+  function konfetiPatlat(adet) {
     if (hareketAzalt) return;
     var tuval = $('konfeti');
     var ctx = tuval.getContext('2d');
@@ -535,7 +592,7 @@
 
     var renkler = ['#ffd100', '#f2c14e', '#4fd8ff', '#a335ee', '#ff8000', '#1eff00'];
     var parcalar = [];
-    for (var i = 0; i < 140; i++) {
+    for (var i = 0; i < (adet || 140); i++) {
       var aci = -Math.PI / 2 + (Math.random() - 0.5) * 1.6;
       var hiz = 7 + Math.random() * 9;
       parcalar.push({
@@ -629,7 +686,17 @@
   $('cikis-modal').addEventListener('click', function (e) {
     if (e.target === this) modalKapat();
   });
-  $('yeni-ders-btn').addEventListener('click', yeniGorev);
+  $('yeni-ders-btn').addEventListener('click', seviyeyeBasla);
+  $('sa-kapat-btn').addEventListener('click', seviyeAtlaKapat);
+  $('sa-devam-btn').addEventListener('click', function () {
+    seviyeAtlaKapat();
+    if (kalanSayi(seviye) === 0) { // son seviye de bitti: gidilecek yeni seviye yok
+      seviyeKartlariniGuncelle();
+      ekranGoster('baslangic');
+      return;
+    }
+    seviyeyeBasla();
+  });
   $('sifirla-btn').addEventListener('click', function () {
     if (!confirm(seviyeAdi(seviye) + ' seviyesindeki ilerlemen silinecek. Emin misin?')) return;
     ogrenilenler[seviye] = new Set();
@@ -650,6 +717,10 @@
   document.addEventListener('keydown', function (e) {
     if (e.repeat || e.ctrlKey || e.metaKey || e.altKey) return;
 
+    if (!$('seviye-atla').hidden) {
+      if (e.key === 'Escape') seviyeAtlaKapat();
+      return;
+    }
     if (!$('cikis-modal').hidden) {
       if (e.key === 'Escape') modalKapat();
       return;

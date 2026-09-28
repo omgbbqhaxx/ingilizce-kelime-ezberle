@@ -1027,6 +1027,101 @@ kbd {
 @keyframes sol { from { opacity: 0; } }
 @keyframes yukari-kay { from { transform: translateY(100%); } }
 
+/* ================= Seviye atlama kutlaması ================= */
+.seviye-atla {
+  --renk: var(--nadir-2);
+  position: fixed;
+  inset: 0;
+  z-index: 25;
+  display: grid;
+  place-items: center;
+  padding: 24px 16px;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 38%, rgba(45, 22, 80, .97), rgba(5, 3, 10, .99) 70%);
+}
+.seviye-atla.goster { animation: sol .35s both; }
+.sa-isik {
+  /* rozetin arkasında dönen altın ışınlar */
+  position: absolute;
+  left: 50%;
+  top: 38%;
+  width: 720px;
+  height: 720px;
+  margin: -360px 0 0 -360px;
+  border-radius: 50%;
+  background: repeating-conic-gradient(from 0deg, rgba(255, 209, 0, .16) 0 9deg, transparent 9deg 18deg);
+  -webkit-mask: radial-gradient(circle, #000 12%, transparent 62%);
+  mask: radial-gradient(circle, #000 12%, transparent 62%);
+  animation: don 24s linear infinite;
+  pointer-events: none;
+}
+.sa-icerik {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+.sa-rozet {
+  display: grid;
+  place-items: center;
+  width: 118px;
+  height: 118px;
+  margin: 26px 0 14px;
+  border: 4px solid var(--altin);
+  border-radius: 14px;
+  background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--renk) 75%, #fff), var(--renk) 40%, color-mix(in srgb, var(--renk) 35%, #000) 85%);
+  box-shadow: 0 0 0 4px #2a1a05, 0 0 40px var(--renk), 0 0 90px color-mix(in srgb, var(--renk) 60%, transparent), inset 0 0 20px rgba(0, 0, 0, .5);
+  transform: rotate(45deg);
+}
+.seviye-atla.goster .sa-rozet { animation: rozet-gir 1s var(--yay) .1s both; }
+.sa-rozet span {
+  transform: rotate(-45deg);
+  color: #fff;
+  font-family: var(--baslik-font);
+  font-size: 56px;
+  font-weight: 900;
+  line-height: 1;
+  text-shadow: 0 3px 0 rgba(0, 0, 0, .5), 0 0 16px rgba(0, 0, 0, .4);
+}
+@keyframes rozet-gir {
+  0% { transform: rotate(-315deg) scale(0); opacity: 0; }
+  60% { transform: rotate(45deg) scale(1.2); opacity: 1; }
+  100% { transform: rotate(45deg) scale(1); }
+}
+.sa-ad {
+  font-family: var(--baslik-font);
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--renk);
+  text-shadow: 0 2px 0 #000, 0 0 18px var(--renk);
+  letter-spacing: 1px;
+}
+.seviye-atla h2 {
+  font-family: var(--baslik-font);
+  font-weight: 900;
+  font-size: clamp(26px, 8vw, 34px);
+  background: linear-gradient(180deg, #fff6d6 0%, var(--altin) 45%, #b07a1c 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 2px 0 #2a1a05) drop-shadow(0 0 16px rgba(242, 193, 78, .45));
+}
+.sa-alt { color: var(--yazi); font-size: 18px; line-height: 1.4; margin-bottom: 8px; }
+.seviye-atla.goster .sa-ad,
+.seviye-atla.goster h2,
+.seviye-atla.goster .sa-alt,
+.seviye-atla.goster .btn,
+.seviye-atla.goster .btn-metin { animation: kay-yukari .5s var(--yay) both; }
+.seviye-atla.goster .sa-ad { animation-delay: .6s; }
+.seviye-atla.goster h2 { animation-delay: .75s; }
+.seviye-atla.goster .sa-alt { animation-delay: .9s; }
+.seviye-atla.goster .btn { animation-delay: 1.05s; }
+.seviye-atla.goster .btn-metin { animation-delay: 1.15s; }
+
 /* ================= Konfeti ================= */
 .konfeti {
   position: fixed;
