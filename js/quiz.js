@@ -108,7 +108,7 @@
       var toplam = toplamSayi(s);
       if (!toplam) return;
       var kalan = kalanSayi(s);
-      b.querySelector('.seviye-sayi').textContent = kalan === 0 ? 'Tamamlandı ✓' : sayiYaz(kalan) + ' kaldı';
+      b.querySelector('.seviye-sayi').textContent = kalan === 0 ? 'Tamamlandı ✓' : sayiYaz(toplam - kalan) + ' / ' + sayiYaz(toplam);
       b.querySelector('.seviye-bar i').style.width = ((toplam - kalan) / toplam * 100) + '%';
       b.classList.toggle('tamam', kalan === 0);
     });
@@ -126,7 +126,6 @@
     }
     var yuzde = ogrenilen / toplam * 100;
     $('genel-ogrenilen').textContent = sayiYaz(ogrenilen) + ' / ' + sayiYaz(toplam);
-    $('genel-kalan').textContent = sayiYaz(toplam - ogrenilen);
     // 40.000 kelimede yüzde yavaş ilerler; %10'a kadar tek ondalıkla göster (%1,3 gibi)
     $('genel-yuzde').textContent = '%' + (Math.floor(yuzde * (yuzde < 10 ? 10 : 1)) / (yuzde < 10 ? 10 : 1)).toLocaleString('tr');
     $('genel-dolgu').style.width = yuzde + '%';
@@ -278,9 +277,15 @@
     dersBaslat(kelimeler);
   }
 
-  function kalanBilgisiniGuncelle(zipla) {
-    $('kalan-sayi').textContent = sayiYaz(kalanSayi(seviye));
-    if (zipla) animasyonuYenidenBaslat($('kalan-sayi'), 'zipla');
+  // Soru ekranındaki yeşil skill bar: öğrenilen / toplam
+  function skillBariniGuncelle(parla) {
+    var toplam = toplamSayi(seviye);
+    var ogrenilen = toplam - kalanSayi(seviye);
+    var yuzde = ogrenilen / toplam * 100;
+    $('skill-sayi').textContent = sayiYaz(ogrenilen) + ' / ' + sayiYaz(toplam);
+    $('skill-dolgu').style.width = yuzde + '%';
+    $('skill-bar').setAttribute('aria-valuenow', Math.floor(yuzde));
+    if (parla) animasyonuYenidenBaslat($('skill-bar'), 'parla');
   }
 
   function dersBaslat(kelimeler) {
@@ -295,8 +300,8 @@
       baslangic: Date.now()
     };
     seriyiGuncelle(false);
-    $('kalan-seviye').textContent = seviyeAdi(seviye);
-    kalanBilgisiniGuncelle(false);
+    $('skill-seviye').textContent = seviyeAdi(seviye);
+    skillBariniGuncelle(false);
     ekranGoster('soru');
     soruyuGoster();
   }
@@ -359,7 +364,7 @@
       ders.dogru++;
       ders.seri++;
       ogrenildiIsaretle(seviye, kelime[0]);
-      kalanBilgisiniGuncelle(true);
+      skillBariniGuncelle(true);
       xpYazisiGoster(secilenBtn);
       seriyiGuncelle(true);
       if (ders.seri % SERI_ROZET_ARALIGI === 0) {
@@ -471,7 +476,7 @@
 
     say($('sonuc-xp'), ders.dogru * XP_PUANI, function (n) { return '+' + n + ' XP'; });
 
-    // Seviye geri sayımı: dersten önceki kalan sayıdan şimdikine doğru azalır
+    // Seviye ilerlemesi: çubuk ve sayı, dersten önceki öğrenilen sayıdan şimdikine doğru dolar
     var toplamKelime = toplamSayi(seviye);
     var kalanSimdi = kalanSayi(seviye);
     $('durum-seviye').textContent = seviyeAdi(seviye);
@@ -481,9 +486,13 @@
     void dolgu.offsetWidth;
     dolgu.style.transition = '';
     dolgu.style.width = ((toplamKelime - kalanSimdi) / toplamKelime * 100) + '%';
-    say($('durum-kalan'), kalanSimdi, function (n) {
-      return n === 0 ? 'Seviye tamamlandı! 🏆' : sayiYaz(n) + ' kelime kaldı';
-    }, ders.kalanBaslangic);
+    var ogrenilenOnce = toplamKelime - ders.kalanBaslangic;
+    var ogrenilenSimdi = toplamKelime - kalanSimdi;
+    $('durum-not').textContent = kalanSimdi === 0 ? 'Seviye tamamlandı! 🏆' :
+      '+' + sayiYaz(ogrenilenSimdi - ogrenilenOnce) + ' yeni kelime';
+    say($('durum-sayi'), ogrenilenSimdi, function (n) {
+      return sayiYaz(n) + ' / ' + sayiYaz(toplamKelime);
+    }, ogrenilenOnce);
     seviyeKartlariniGuncelle();
     say($('istat-dogru'), ders.dogru, function (n) { return n + '/' + toplam; });
     say($('istat-basari'), basari, function (n) { return n + '%'; });

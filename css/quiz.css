@@ -410,17 +410,20 @@ h1, h2, h3, p { margin: 0; }
   color: var(--altin);
   font-size: 15px;
 }
-.genel-xp-ust span:last-child { color: #b8ffa8; font-weight: 800; font-size: 14px; font-variant-numeric: tabular-nums; }
-.genel-xp-bar {
+.genel-xp-ust span:last-child { color: #b8ffa8; font-weight: 800; font-size: 15px; font-variant-numeric: tabular-nums; }
+/* Yeşil skill bar: soru ekranı, sonuç ekranı ve genel ilerlemede ortak */
+.skill-bar {
   position: relative;
-  height: 20px;
+  flex: 1;
+  height: 16px;
   border: 1px solid #3d6b2e;
   border-radius: 4px;
   background: #050a05;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, .8);
   overflow: hidden;
 }
-.genel-xp-bar::after {
+.skill-bar-buyuk { height: 20px; }
+.skill-bar::after {
   /* 10 bölmeli çentikler */
   content: "";
   position: absolute;
@@ -428,7 +431,7 @@ h1, h2, h3, p { margin: 0; }
   background: repeating-linear-gradient(90deg, transparent 0 calc(10% - 1px), rgba(0, 0, 0, .5) calc(10% - 1px) 10%);
   pointer-events: none;
 }
-.genel-xp-bar i {
+.skill-bar i {
   display: block;
   height: 100%;
   width: 0;
@@ -437,7 +440,7 @@ h1, h2, h3, p { margin: 0; }
   box-shadow: 0 0 10px rgba(30, 255, 0, .7);
   transition: width .8s var(--yay);
 }
-.genel-xp-bar span {
+.skill-bar span {
   position: absolute;
   inset: 0;
   display: grid;
@@ -447,10 +450,32 @@ h1, h2, h3, p { margin: 0; }
   font-family: var(--baslik-font);
   font-size: 12px;
   font-weight: 700;
+  font-variant-numeric: tabular-nums;
   text-shadow: 0 1px 2px #000, 0 0 4px #000;
 }
-.genel-xp-alt { margin-top: 6px; color: var(--soluk-yazi); font-size: 14px; text-align: center; }
-.genel-xp-alt b { color: #b8ffa8; font-weight: 800; font-variant-numeric: tabular-nums; }
+.skill-bar-buyuk span { font-size: 13px; }
+.skill-bar.parla { animation: skill-parla .6s ease-out; }
+@keyframes skill-parla {
+  0% { box-shadow: inset 0 2px 4px rgba(0, 0, 0, .8), 0 0 0 rgba(30, 255, 0, 0); }
+  30% { box-shadow: inset 0 2px 4px rgba(0, 0, 0, .8), 0 0 16px rgba(30, 255, 0, .9); }
+  100% { box-shadow: inset 0 2px 4px rgba(0, 0, 0, .8), 0 0 0 rgba(30, 255, 0, 0); }
+}
+
+/* Soru ekranında seviye adı + skill bar */
+.skill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 2px;
+}
+.skill-ad {
+  flex: none;
+  font-family: var(--baslik-font);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--altin);
+  text-shadow: 0 1px 0 #000;
+}
 
 .seviye-bitti { color: var(--yesil); font-size: 16px; max-width: 400px; line-height: 1.4; }
 .seviye-bitti .btn-metin { padding: 4px 6px; font-size: 14px; }
@@ -562,23 +587,6 @@ kbd {
   40% { transform: scale(1.5) rotate(-8deg); }
   100% { transform: scale(1); }
 }
-
-/* Soru ekranında seviye geri sayımı */
-.kalan-bilgi {
-  margin-top: 2px;
-  color: var(--soluk-yazi);
-  font-size: 15px;
-  text-align: center;
-}
-.kalan-bilgi b {
-  display: inline-block;
-  color: #d59bff;
-  font-family: var(--baslik-font);
-  font-weight: 900;
-  text-shadow: 0 0 8px rgba(163, 53, 238, .7);
-  font-variant-numeric: tabular-nums;
-}
-.kalan-bilgi b.zipla { animation: seri-zipla .5s var(--yay); }
 
 .ekran-soru { padding-bottom: 190px; }
 .soru-icerik {
@@ -711,6 +719,7 @@ kbd {
   position: fixed;
   z-index: 6;
   translate: -100% 0;
+  white-space: nowrap;
   font-family: var(--baslik-font);
   font-size: 20px;
   font-weight: 900;
@@ -884,25 +893,7 @@ kbd {
   font-size: 15px;
 }
 .seviye-durum-ust span:first-child { font-family: var(--baslik-font); font-weight: 700; color: var(--altin); }
-.seviye-durum-ust span:last-child { color: #d59bff; font-weight: 800; font-variant-numeric: tabular-nums; }
-.seviye-durum-bar {
-  position: relative;
-  height: 14px;
-  border: 2px solid transparent;
-  border-radius: 4px;
-  background: linear-gradient(180deg, #0a0812, #1a1428) padding-box, var(--altin-cerceve) border-box;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, .8);
-  overflow: hidden;
-}
-.seviye-durum-bar i {
-  display: block;
-  height: 100%;
-  width: 0;
-  background: linear-gradient(180deg, #d59bff 0%, var(--mor) 45%, var(--mor-koyu) 100%);
-  box-shadow: 0 0 10px rgba(163, 53, 238, .8);
-  transition: width 1s cubic-bezier(.2, .8, .2, 1) .2s;
-}
-
+.seviye-durum-ust span:last-child { color: #b8ffa8; font-weight: 800; font-variant-numeric: tabular-nums; }
 .istatistikler {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

@@ -10,8 +10,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Alegreya+Sans:wght@500;700;800&display=swap" rel="stylesheet">
-  <link rel="preload" as="image" href="images/maskot.webp?v=4.6">
-  <link rel="stylesheet" href="css/quiz.css?v=4.6">
+  <link rel="preload" as="image" href="images/maskot.webp?v=4.7">
+  <link rel="stylesheet" href="css/quiz.css?v=4.7">
 
   <link rel="apple-touch-icon" sizes="57x57" href="static/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="static/apple-icon-60x60.png">
@@ -62,7 +62,7 @@
           <circle cx="100" cy="100" r="72" fill="none" stroke="currentColor" stroke-width="1"/>
           <path d="M100 6 L181 147 L19 147 Z M100 194 L19 53 L181 53 Z" fill="none" stroke="currentColor" stroke-width="1" opacity=".7"/>
         </svg>
-        <img class="maskot maskot-yuzen" src="images/maskot.webp?v=4.6" alt="" width="512" height="512">
+        <img class="maskot maskot-yuzen" src="images/maskot.webp?v=4.7" alt="" width="512" height="512">
       </div>
 
       <h1 id="baslik">Kelime Ezberle</h1>
@@ -93,11 +93,10 @@
       </p>
       <p class="yukleme-hata" id="yukleme-hata" role="alert" hidden>Büyü kitabı açılamadı. İnternet bağlantını kontrol edip tekrar dene.</p>
       <div class="genel-xp" id="genel-xp" hidden>
-        <div class="genel-xp-ust"><span>Genel ilerleme</span><span id="genel-ogrenilen"></span></div>
-        <div class="genel-xp-bar" role="progressbar" aria-label="Genel ilerleme" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="genel-bar">
-          <i id="genel-dolgu"></i><span id="genel-yuzde"></span>
+        <div class="genel-xp-ust"><span>Genel ilerleme</span><span id="genel-yuzde"></span></div>
+        <div class="skill-bar skill-bar-buyuk" role="progressbar" aria-label="Genel ilerleme" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="genel-bar">
+          <i id="genel-dolgu"></i><span id="genel-ogrenilen"></span>
         </div>
-        <p class="genel-xp-alt"><b id="genel-kalan"></b> kelime kaldı</p>
       </div>
       <p class="ipucu-klavye">İpucu: klavyede <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> ile seçebilirsin.</p>
       <p class="kaynak">Sözlük: <a href="https://www.wiktionary.org/" target="_blank" rel="noopener">Wiktionary</a> / <a href="https://www.wikdict.com/" target="_blank" rel="noopener">WikDict</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.tr" target="_blank" rel="noopener">CC BY-SA 4.0</a></p>
@@ -122,7 +121,12 @@
           <span class="seri-alev" aria-hidden="true">🔥</span><span id="seri-sayi">0</span>
         </div>
       </header>
-      <p class="kalan-bilgi"><span id="kalan-seviye"></span> · <b id="kalan-sayi">0</b> kelime kaldı</p>
+      <div class="skill">
+        <span class="skill-ad" id="skill-seviye"></span>
+        <div class="skill-bar" id="skill-bar" role="progressbar" aria-label="Seviye ilerlemesi" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <i id="skill-dolgu"></i><span id="skill-sayi"></span>
+        </div>
+      </div>
 
       <div class="soru-icerik" id="soru-icerik">
         <p class="yonerge">Bu kelimenin Türkçesi ne?</p>
@@ -144,7 +148,7 @@
           <circle cx="100" cy="100" r="84" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="2 6"/>
           <path d="M100 6 L181 147 L19 147 Z M100 194 L19 53 L181 53 Z" fill="none" stroke="currentColor" stroke-width="1" opacity=".7"/>
         </svg>
-        <img class="maskot maskot-zipla" src="images/maskot.webp?v=4.6" alt="" width="512" height="512">
+        <img class="maskot maskot-zipla" src="images/maskot.webp?v=4.7" alt="" width="512" height="512">
       </div>
       <p class="gorev-etiket">Görev tamamlandı</p>
       <h1 id="sonuc-baslik"></h1>
@@ -152,8 +156,8 @@
       <p class="sonuc-xp" id="sonuc-xp">+0 XP</p>
 
       <div class="seviye-durum">
-        <div class="seviye-durum-ust"><span id="durum-seviye"></span><span id="durum-kalan"></span></div>
-        <div class="seviye-durum-bar"><i id="durum-dolgu"></i></div>
+        <div class="seviye-durum-ust"><span id="durum-seviye"></span><span id="durum-not"></span></div>
+        <div class="skill-bar skill-bar-buyuk"><i id="durum-dolgu"></i><span id="durum-sayi"></span></div>
       </div>
 
       <div class="istatistikler">
@@ -198,7 +202,7 @@
   <!-- Çıkış onayı -->
   <div class="modal-arka" id="cikis-modal" hidden>
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-baslik">
-      <img class="maskot maskot-kucuk" src="images/maskot.webp?v=4.6" alt="" width="512" height="512">
+      <img class="maskot maskot-kucuk" src="images/maskot.webp?v=4.7" alt="" width="512" height="512">
       <h3 id="modal-baslik">Görevi bırakıyor musun?</h3>
       <p>Çıkarsan bu görevdeki ilerlemen kaybolur.</p>
       <button class="btn btn-buyuk" id="modal-kal-btn" type="button">Göreve devam et</button>
@@ -208,6 +212,6 @@
 
   <canvas class="konfeti" id="konfeti" aria-hidden="true"></canvas>
 
-  <script src="js/quiz.js?v=4.6"></script>
+  <script src="js/quiz.js?v=4.7"></script>
 </body>
 </html>
