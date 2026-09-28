@@ -3,14 +3,13 @@
 
   var SORU_SAYISI = 20;          // bir dersteki soru sayısı
   var SECENEK_SAYISI = 3;
-  var OTOMATIK_GECIS_MS = 1200;  // doğru cevaptan sonra sonraki soruya geçme süresi
+  var OTOMATIK_GECIS_MS = 300;   // doğru cevaptan sonra yeşil vurgunun görünme süresi
   var SERI_ROZET_ARALIGI = 5;    // her 5 doğruda bir "üst üste" rozeti
 
   // Sürüm, index.html'deki quiz.js?v=... değerinden okunur; sürüm yalnızca orada güncellenir.
   var SURUM = document.currentScript && new URL(document.currentScript.src).searchParams.get('v');
 
   var XP_PUANI = 10;             // doğru cevap başına
-  var OVGULER = ['Kritik vuruş!', 'Tam isabet!', 'Büyü tuttu!', 'Harika!', 'Destansı!', 'Kusursuz!'];
 
   var $ = function (id) { return document.getElementById(id); };
 
@@ -273,7 +272,7 @@
       } else {
         sesCal('dogru');
       }
-      geriBildirimGoster(true, rastgele(OVGULER), kelime[0] + ' = ' + anlamlar(kelime));
+      // Doğruda alt panel açılmaz; kısa bir yeşil vurgudan sonra hemen sonraki soru gelir
       gecisZamanlayici = setTimeout(devam, OTOMATIK_GECIS_MS);
     } else {
       ders.seri = 0;
@@ -295,12 +294,17 @@
     if (arttiMi) animasyonuYenidenBaslat(seri, 'zipla');
   }
 
+  // Yazı sayfaya eklenir, butona değil: soru hemen değiştiği için butonla birlikte kaybolmasın
   function xpYazisiGoster(btn) {
+    var kutu = btn.getBoundingClientRect();
     var yazi = document.createElement('span');
     yazi.className = 'xp-ucan';
     yazi.setAttribute('aria-hidden', 'true');
     yazi.textContent = '+' + XP_PUANI + ' XP';
-    btn.appendChild(yazi);
+    yazi.style.left = (kutu.right - 16) + 'px';
+    yazi.style.top = (kutu.top + kutu.height / 2) + 'px';
+    yazi.addEventListener('animationend', function () { yazi.remove(); });
+    document.body.appendChild(yazi);
   }
 
   function seriRozetiGoster(sayi) {
@@ -331,7 +335,7 @@
     var icerik = $('soru-icerik');
     icerik.classList.remove('giris');
     icerik.classList.add('cikis');
-    setTimeout(soruyuGoster, hareketAzalt ? 0 : 200);
+    setTimeout(soruyuGoster, hareketAzalt ? 0 : 120);
   }
 
   function dersiBitir() {
@@ -362,6 +366,8 @@
     });
     $('tekrar-kutu').hidden = ders.yanlislar.length === 0;
     $('yanlislar-btn').hidden = ders.yanlislar.length === 0;
+    // Yanlış varsa öne çıkan buton "tekrarla"; "yeni görev" ikincil kalır
+    $('yeni-ders-btn').classList.toggle('btn-ikincil', ders.yanlislar.length > 0);
 
     ekranGoster('sonuc');
     // sıçrama animasyonunun her derste yeniden oynaması için

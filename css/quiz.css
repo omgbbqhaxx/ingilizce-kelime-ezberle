@@ -378,6 +378,25 @@ kbd {
 @media (hover: none) { .ipucu-klavye { display: none; } }
 .kaynak { color: var(--soluk-yazi); font-size: 13px; opacity: .8; }
 .kaynak a { color: inherit; }
+.github {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 1px solid var(--altin-koyu);
+  border-radius: 8px;
+  background: rgba(12, 10, 20, .6);
+  color: var(--altin);
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: box-shadow .2s, color .2s;
+}
+.github:hover { color: var(--altin-acik); box-shadow: 0 0 14px rgba(242, 193, 78, .35); }
+.github svg { width: 18px; height: 18px; flex: none; }
+.powered { color: var(--soluk-yazi); font-size: 14px; }
+.powered a { color: var(--arkan); font-weight: 700; text-decoration: none; }
+.powered a:hover { text-shadow: 0 0 10px rgba(79, 216, 255, .7); }
 .surum { color: var(--soluk-yazi); font-size: 12px; letter-spacing: .5px; opacity: .6; }
 
 /* ================= Soru ================= */
@@ -579,9 +598,9 @@ kbd {
 
 /* "+10 XP" uçan yazı */
 .xp-ucan {
-  position: absolute;
-  right: 16px;
-  top: 50%;
+  position: fixed;
+  z-index: 6;
+  translate: -100% 0;
   font-family: var(--baslik-font);
   font-size: 20px;
   font-weight: 900;
@@ -617,7 +636,7 @@ kbd {
 .soru-icerik.giris .secenek:nth-child(2) { animation-delay: .18s; }
 .soru-icerik.giris .secenek:nth-child(3) { animation-delay: .24s; }
 .soru-icerik.giris .secenekler { animation: none; }
-.soru-icerik.cikis { animation: kay-cik .2s ease-in forwards; }
+.soru-icerik.cikis { animation: kay-cik .12s ease-in forwards; }
 @keyframes kay-gir {
   from { opacity: 0; transform: translateX(40px); }
   to { opacity: 1; transform: none; }
